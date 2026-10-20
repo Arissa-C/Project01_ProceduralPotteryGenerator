@@ -2,7 +2,13 @@ import sys
 from PySide2 import QtWidgets, QtCore
 import maya.cmds as cmds
 
-class Pot():
-    
+
+class Pottery():
+
     def __init__(self):
-        pass 
+        # distribution parameters
+        pass
+
+    def create(self):
+        # functions to be added later
+        pass
