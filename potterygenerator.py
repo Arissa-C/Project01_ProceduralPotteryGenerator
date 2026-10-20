@@ -7,8 +7,12 @@ class Pottery():
 
     def __init__(self):
         # distribution parameters
+        # pot size parameters
+        # both placeholder parameters
         pass
 
     def create(self):
-        # functions to be added later
+        # functions to create shapes for pot
         pass
+
+
