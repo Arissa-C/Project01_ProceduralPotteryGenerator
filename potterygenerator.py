@@ -1,23 +1,23 @@
 import sys
 from PySide2 import QtWidgets, QtCore
 import maya.cmds as cmds
+import random
 
 
 class Pottery():
 
     def __init__(self):
+        # All placeholder values until GUI is done
         # distribution parameters
         self.total_pots = 3
         self.pot_spacing = 2
         self.spiral_angle = 1
+        self.rotation_jitter = 180
         # pot size parameters
         self.min_height = 1
         self.max_height = 7
         self.min_radius = 1
         self.max_radius = 6
-
-
-        # both placeholder parameters
         pass
 
     def create(self):
@@ -31,11 +31,13 @@ class Pottery():
         pass
 
     def calculate_position(self):
-        # 
+        # INPUT: current pot #, Pot spacing, spiral angle
+        # OUTPUT: Position of pot in scene space
         pass
 
     def calculate_rotation(self):
-        #
+        # INPUT: Rotation jitter
+        # OUTPUT: Rotation of the pot
         pass
     
     def calculate_size(self):
