@@ -17,5 +17,11 @@ class Pottery():
         pass
 
     def create(self):
-        # functions to create shapes for pot
+        # creates whole set of pots
+        # call create one pot method in loop
+        # loop as many times as input says to do (total pots)
+        pass
+
+    def create_pot(self):
+        # creates one pot, given position, rotation, size
         pass
