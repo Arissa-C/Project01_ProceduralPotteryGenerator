@@ -38,13 +38,11 @@ class Pottery():
     def calculate_rotation(self, rotation_jitter):
         # INPUT: Rotation jitter
         # OUTPUT: Rotation of the pot
-        return random.random() * rotation_jitter 
-    
+        return random.random() * rotation_jitter
+
     def calculate_size(self, min_height, max_height, min_radius, max_radius):
         # INPUT: min and max values (height and radius)
         # OUTPUT: randomized value in that range, for one pot
         height = random.uniform(min_height, max_height)
         radius = random.uniform(min_radius, max_radius)
         return (height, radius)
-
-    
