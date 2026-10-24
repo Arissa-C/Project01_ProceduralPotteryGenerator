@@ -25,3 +25,15 @@ class Pottery():
     def create_pot(self):
         # creates one pot, given position, rotation, size
         pass
+
+    def calculate_position(self):
+        # 
+        pass
+
+    def calculate_rotation(self):
+        pass
+    
+    def calculate_size(self):
+        # INPUT: min and max values (height and radius)
+        # OUTPUT: randomized value in that range, for one pot
+        pass
