@@ -35,10 +35,10 @@ class Pottery():
         # OUTPUT: Position of pot in scene space
         pass
 
-    def calculate_rotation(self):
+    def calculate_rotation(self, rotation_jitter):
         # INPUT: Rotation jitter
         # OUTPUT: Rotation of the pot
-        pass
+        return random.random() * rotation_jitter 
     
     def calculate_size(self):
         # INPUT: min and max values (height and radius)
