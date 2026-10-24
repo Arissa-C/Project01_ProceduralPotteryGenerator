@@ -8,10 +8,14 @@ class Pottery():
     def __init__(self):
         # distribution parameters
         self.total_pots = 3
+        self.pot_spacing = 2
+        self.spiral_angle = 1
         # pot size parameters
-        self.pot_height = 7
-        self.pot_width = 5
-        self.pot_radius = 1
+        self.min_height = 1
+        self.max_height = 7
+        self.min_radius = 1
+        self.max_radius = 6
+
 
         # both placeholder parameters
         pass
@@ -31,6 +35,7 @@ class Pottery():
         pass
 
     def calculate_rotation(self):
+        #
         pass
     
     def calculate_size(self):
