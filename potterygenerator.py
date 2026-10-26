@@ -26,8 +26,11 @@ class Pottery():
         # loop as many times as input says to do (total pots)
         pass
 
-    def create_pot(self):
+    def create_pot(self, min_height, max_height, min_radius, max_radius):
         # creates one pot, given position, rotation, size
+        (height, radius) = \
+            self.calculate_size(min_height, max_height, min_radius, max_radius)
+        cmds.polyCylinder(name="pot_base", radius=radius, height=height)
         pass
 
     def calculate_position(self):
