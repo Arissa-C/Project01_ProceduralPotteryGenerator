@@ -26,11 +26,14 @@ class Pottery():
         # loop as many times as input says to do (total pots)
         pass
 
-    def create_pot(self, min_height, max_height, min_radius, max_radius):
+    def create_pot(self, min_height, max_height,
+                   min_radius, max_radius, rotation_jitter):
         # creates one pot, given position, rotation, size
         (height, radius) = \
             self.calculate_size(min_height, max_height, min_radius, max_radius)
+        angle = self.calculate_rotation(rotation_jitter)
         cmds.polyCylinder(name="pot_base", radius=radius, height=height)
+        cmds.xform(rotation=angle)
         pass
 
     def calculate_position(self):
@@ -42,7 +45,7 @@ class Pottery():
         # INPUT: Rotation jitter
         # OUTPUT: Rotation of the pot
         return random.random() * rotation_jitter
-
+    
     def calculate_size(self, min_height, max_height, min_radius, max_radius):
         # INPUT: min and max values (height and radius)
         # OUTPUT: randomized value in that range, for one pot
