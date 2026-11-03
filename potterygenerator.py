@@ -49,7 +49,7 @@ class Pottery():
                 first_pot_spacing, current_pot_index)
 
         cmds.polyCylinder(name="pot_base", radius=radius, height=height)
-        cmds.xform(rotation=[angle], translation=[x_coord, 0, z_coord])
+        cmds.xform(rotation=[0, angle, 0], translation=[x_coord, 0, z_coord])
 
     def calculate_position(self, spacing_between_pots,
                            angle_between_pots, first_pot_spacing,
