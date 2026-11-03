@@ -54,7 +54,7 @@ class Pottery():
                 spacing_between_pots, angle_between_pots,
                 first_pot_spacing, current_pot_index)
 
-        pot_base_obj = cmds.polyCylinder(
+        pot_base_obj, pot_base_node = cmds.polyCylinder(
             name="pot_base", radius=radius, height=height)
         cmds.xform(rotation=[0, angle, 0], translation=[x_coord, 0, z_coord])
 
