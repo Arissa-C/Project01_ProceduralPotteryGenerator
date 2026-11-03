@@ -1,5 +1,9 @@
 import sys
-from PySide2 import QtWidgets, QtCore
+
+from PySide2 import QtWidgets, QtCore, QtGui
+from PySide2.QtCharts import QtCharts
+from PySide2.QtGui import QtPainter
+
 import maya.cmds as cmds
 import random
 
