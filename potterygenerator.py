@@ -42,13 +42,13 @@ class Pottery():
         (height, radius) = \
             self.calculate_size(min_height, max_height, min_radius, max_radius)
         angle = self.calculate_rotation(rotation_jitter)
-        (x_coord, y_coord) =\
+        (x_coord, z_coord) =\
             self.calculate_position(
                 spacing_between_pots, angle_between_pots,
                 first_pot_spacing, current_pot_index)
 
         cmds.polyCylinder(name="pot_base", radius=radius, height=height)
-        cmds.xform(rotation=[angle], translation=[x_coord, 0, y_coord])
+        cmds.xform(rotation=[angle], translation=[x_coord, 0, z_coord])
 
     def calculate_position(self, spacing_between_pots,
                            angle_between_pots, first_pot_spacing,
@@ -74,10 +74,10 @@ class Pottery():
         x_coord = (spacing_between_pots * current_pot_index +
                    first_pot_spacing) * math.cos(angle_between_pots *
                                                  current_pot_index)
-        y_coord = (spacing_between_pots * current_pot_index +
+        z_coord = (spacing_between_pots * current_pot_index +
                    first_pot_spacing) * math.sin(angle_between_pots *
                                                  current_pot_index)
-        return (x_coord, y_coord)
+        return (x_coord, z_coord)
 
     def calculate_rotation(self, rotation_jitter):
         # INPUT: Rotation jitter
