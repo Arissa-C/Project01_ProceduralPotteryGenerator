@@ -15,9 +15,9 @@ class Pottery():
         # distribution parameters
         self.total_pots = 3
         self.rotation_jitter = 180
-        self.distance_between_pots = 2
+        self.spacing_between_pots = 2
         self.angle_between_pots = 1
-        self.first_pot_distance = 0
+        self.first_pot_spacing = 0
         # pot size parameters
         self.min_height = 1
         self.max_height = 7
@@ -41,9 +41,10 @@ class Pottery():
         cmds.xform(rotation=angle)
         pass
 
-    def calculate_position(self, distance_between_pots,
-                           angle_between_pots, first_pot_distance):
-        # INPUT: current pot #, Pot spacing, spiral angle
+    def calculate_position(self, spacing_between_pots,
+                           angle_between_pots, first_pot_spacing,
+                           current_pot_index):
+        # INPUT: current pot #, first pot spacing, general pot spacing, pot angle
         # OUTPUT: x and y coords (floats) of pot in scene space
         #
         # create right triangle from origin, with angle as a parameter and
@@ -57,7 +58,8 @@ class Pottery():
         # following formulas are based on sohcahtoa
         # modified to fit my needs
         # x = (distance * index + initial_distance) * cos(angle * index)
-        # y is same but sin instead of cos
+        # y is same but sin instead of cos 
+        # returns (x_coord, y_coord)
         pass
 
     def calculate_rotation(self, rotation_jitter):
