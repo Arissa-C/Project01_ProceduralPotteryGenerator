@@ -26,11 +26,20 @@ class Pottery():
         self.max_radius = 6
         pass
 
-    def create(self):
+    def create(self,
+               min_height, max_height,
+               min_radius, max_radius,
+               rotation_jitter,
+               spacing_between_pots, angle_between_pots,
+               first_pot_spacing, total_pots):
         # creates whole set of pots
         # call create one pot method in loop
-        # loop as many times as input says to do (total pots)
-        pass
+        # use for loop, loop based on range(total_pots)
+        # inside loop
+        for pot_index in range(total_pots):
+            self.create_pot(min_height, max_height, min_radius, max_radius,
+                            rotation_jitter, spacing_between_pots,
+                            angle_between_pots, first_pot_spacing, pot_index)
 
     def create_pot(self,
                    min_height, max_height,
