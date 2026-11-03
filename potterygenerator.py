@@ -1,9 +1,4 @@
-import sys
 import math
-
-from PySide2 import QtWidgets, QtCore, QtGui
-from PySide2.QtCharts import QtCharts
-from PySide2.QtGui import QtPainter
 
 import maya.cmds as cmds
 import random
@@ -26,20 +21,17 @@ class Pottery():
         self.max_radius = 6
         pass
 
-    def create(self,
-               min_height, max_height,
-               min_radius, max_radius,
-               rotation_jitter,
-               spacing_between_pots, angle_between_pots,
-               first_pot_spacing, total_pots):
+    def create(self):
         # creates whole set of pots
         # call create one pot method in loop
         # use for loop, loop based on range(total_pots)
         # inside loop
-        for pot_index in range(total_pots):
-            self.create_pot(min_height, max_height, min_radius, max_radius,
-                            rotation_jitter, spacing_between_pots,
-                            angle_between_pots, first_pot_spacing, pot_index)
+        for pot_index in range(self.total_pots):
+            self.create_pot(self.min_height, self.max_height,
+                            self.min_radius, self.max_radius,
+                            self.rotation_jitter, self.spacing_between_pots,
+                            self.angle_between_pots, self.first_pot_spacing,
+                            pot_index)
 
     def create_pot(self,
                    min_height, max_height,
