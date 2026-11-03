@@ -19,6 +19,8 @@ class Pottery():
         self.max_height = 7
         self.min_radius = 1
         self.max_radius = 6
+        # naming parameters
+        self.grp_name = "potSet"
         pass
 
     def create(self):
@@ -26,12 +28,16 @@ class Pottery():
         # call create one pot method in loop
         # use for loop, loop based on range(total_pots)
         # inside loop
+        group_objs = []
+
         for pot_index in range(self.total_pots):
-            self.create_pot(self.min_height, self.max_height,
-                            self.min_radius, self.max_radius,
-                            self.rotation_jitter, self.spacing_between_pots,
-                            self.angle_between_pots, self.first_pot_spacing,
-                            pot_index)
+            group_objs.append(self.create_pot(self.min_height, self.max_height,
+                              self.min_radius, self.max_radius,
+                              self.rotation_jitter, self.spacing_between_pots,
+                              self.angle_between_pots, self.first_pot_spacing,
+                              pot_index))
+
+        cmds.group(group_objs, name=self.grp_name)
 
     def create_pot(self,
                    min_height, max_height,
@@ -48,8 +54,11 @@ class Pottery():
                 spacing_between_pots, angle_between_pots,
                 first_pot_spacing, current_pot_index)
 
-        cmds.polyCylinder(name="pot_base", radius=radius, height=height)
+        pot_base_obj = cmds.polyCylinder(
+            name="pot_base", radius=radius, height=height)
         cmds.xform(rotation=[0, angle, 0], translation=[x_coord, 0, z_coord])
+
+        return pot_base_obj
 
     def calculate_position(self, spacing_between_pots,
                            angle_between_pots, first_pot_spacing,
