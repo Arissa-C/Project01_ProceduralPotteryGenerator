@@ -18,7 +18,7 @@ class Pottery():
         self.rotation_jitter = 180
         self.spacing_between_pots = 2
         self.angle_between_pots = 1
-        self.first_pot_spacing = 0
+        self.first_pot_spacing = 3
         # pot size parameters
         self.min_height = 1
         self.max_height = 7
@@ -32,8 +32,12 @@ class Pottery():
         # loop as many times as input says to do (total pots)
         pass
 
-    def create_pot(self, min_height, max_height,
-                   min_radius, max_radius, rotation_jitter, current_pot_index):
+    def create_pot(self,
+                   min_height, max_height,
+                   min_radius, max_radius,
+                   rotation_jitter,
+                   spacing_between_pots, angle_between_pots,
+                   first_pot_spacing, current_pot_index):
         # creates one pot, given position, rotation, size
         (height, radius) = \
             self.calculate_size(min_height, max_height, min_radius, max_radius)
