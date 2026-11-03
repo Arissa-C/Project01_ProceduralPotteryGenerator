@@ -1,4 +1,5 @@
 import sys
+import math
 
 from PySide2 import QtWidgets, QtCore, QtGui
 from PySide2.QtCharts import QtCharts
@@ -44,7 +45,8 @@ class Pottery():
     def calculate_position(self, spacing_between_pots,
                            angle_between_pots, first_pot_spacing,
                            current_pot_index):
-        # INPUT: current pot #, first pot spacing, general pot spacing, pot angle
+        # INPUT: current pot #, first pot spacing, general pot spacing,
+        # pot angle
         # OUTPUT: x and y coords (floats) of pot in scene space
         #
         # create right triangle from origin, with angle as a parameter and
@@ -58,15 +60,22 @@ class Pottery():
         # following formulas are based on sohcahtoa
         # modified to fit my needs
         # x = (distance * index + initial_distance) * cos(angle * index)
-        # y is same but sin instead of cos 
+        # y is same but sin instead of cos
         # returns (x_coord, y_coord)
-        pass
+
+        x_coord = (spacing_between_pots * current_pot_index +
+                   first_pot_spacing) * math.cos(angle_between_pots *
+                                                 current_pot_index)
+        y_coord = (spacing_between_pots * current_pot_index +
+                   first_pot_spacing) * math.sin(angle_between_pots *
+                                                 current_pot_index)
+        return (x_coord, y_coord)
 
     def calculate_rotation(self, rotation_jitter):
         # INPUT: Rotation jitter
         # OUTPUT: Rotation of the pot
         return random.random() * rotation_jitter
-    
+
     def calculate_size(self, min_height, max_height, min_radius, max_radius):
         # INPUT: min and max values (height and radius)
         # OUTPUT: randomized value in that range, for one pot
