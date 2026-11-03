@@ -14,9 +14,10 @@ class Pottery():
         # All placeholder values until GUI is done
         # distribution parameters
         self.total_pots = 3
-        self.pot_spacing = 2
-        self.spiral_angle = 1
         self.rotation_jitter = 180
+        self.distance_between_pots = 2
+        self.first_pot_distance = 0
+        self.angle_between_pots = 1
         # pot size parameters
         self.min_height = 1
         self.max_height = 7
@@ -31,7 +32,7 @@ class Pottery():
         pass
 
     def create_pot(self, min_height, max_height,
-                   min_radius, max_radius, rotation_jitter):
+                   min_radius, max_radius, rotation_jitter, current_pot_index):
         # creates one pot, given position, rotation, size
         (height, radius) = \
             self.calculate_size(min_height, max_height, min_radius, max_radius)
@@ -42,7 +43,15 @@ class Pottery():
 
     def calculate_position(self):
         # INPUT: current pot #, Pot spacing, spiral angle
-        # OUTPUT: Position of pot in scene space
+        # OUTPUT: x and y coords (floats) of pot in scene space
+        #
+        # create right triangle from origin, with angle as a parameter and
+        # hypotenuse length as a parameter
+        # (each parameter will be multiplied by pot index
+        # to create increasing distance from center.
+        # this creates a spiral of pots outwards as pot index goes up)
+        # return x and y coordinates of farthest point,
+        # where pot will ultimately be positioned
         pass
 
     def calculate_rotation(self, rotation_jitter):
