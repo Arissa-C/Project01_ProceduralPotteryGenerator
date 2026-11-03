@@ -16,8 +16,8 @@ class Pottery():
         self.total_pots = 3
         self.rotation_jitter = 180
         self.distance_between_pots = 2
-        self.first_pot_distance = 0
         self.angle_between_pots = 1
+        self.first_pot_distance = 0
         # pot size parameters
         self.min_height = 1
         self.max_height = 7
@@ -41,7 +41,8 @@ class Pottery():
         cmds.xform(rotation=angle)
         pass
 
-    def calculate_position(self):
+    def calculate_position(self, distance_between_pots,
+                           angle_between_pots, first_pot_distance):
         # INPUT: current pot #, Pot spacing, spiral angle
         # OUTPUT: x and y coords (floats) of pot in scene space
         #
@@ -52,6 +53,11 @@ class Pottery():
         # this creates a spiral of pots outwards as pot index goes up)
         # return x and y coordinates of farthest point,
         # where pot will ultimately be positioned
+        #
+        # following formulas are based on sohcahtoa
+        # modified to fit my needs
+        # x = (distance * index + initial_distance) * cos(angle * index)
+        # y is same but sin instead of cos
         pass
 
     def calculate_rotation(self, rotation_jitter):
