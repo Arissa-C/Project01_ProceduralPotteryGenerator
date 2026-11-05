@@ -1,7 +1,41 @@
 import math
 
+from PySide2 import QtWidgets, QtCore
+
 import maya.cmds as cmds
 import random
+
+
+class Pottery_GUI(QtWidgets.QDialog):
+
+    def __init__(self):
+        super().__init__()
+        self.pottery_generator = Pottery()
+        self.setWindowTitle("Pot Generator 9000")
+        self.create_layout()
+        self.create_connections()
+
+    def create_layout(self):
+        self.main_window = QtWidgets.QVBoxLayout()
+        self._form_ui()
+        self.create_btn = QtWidgets.QPushButton("Create")
+        self.main_window.addWidget(self.create_btn)
+        self.setLayout(self.main_window)
+
+    def _form_ui(self):
+        self.form_lay = QtWidgets.QFormLayout()
+        self.torso_rad_dspnbx = QtWidgets.QDoubleSpinBox()
+        self.torso_rad_dspnbx.setValue(0.5)
+        self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
+        self.main_window.addLayout(self.form_lay)
+
+    def create_connections(self):
+        self.create_btn.clicked.connect(self.create)
+
+    @QtCore.Slot()
+    def create(self):
+        self.pottery_generator.torso_radius = self.torso_rad_dspnbx.value()
+        self.pottery_generator.create()
 
 
 class Pottery():
