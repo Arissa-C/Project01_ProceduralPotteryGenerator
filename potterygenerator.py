@@ -93,8 +93,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # height sliders
-        self.slider_max_height = Custom_Slider("Max height", 0.01)
-        self.slider_min_height = Custom_Slider("Min height", 0.01)
+        self.slider_max_height = Custom_Slider("Max height", 0.01, 150)
+        self.slider_min_height = Custom_Slider("Min height", 0.01, 100)
         self.slider_max_height.set_bounded_slider(
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
@@ -114,8 +114,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # width sliders
-        self.slider_max_width = Custom_Slider("Max width", 0.01)
-        self.slider_min_width = Custom_Slider("Min width", 0.01)
+        self.slider_max_width = Custom_Slider("Max width", 0.01, 50)
+        self.slider_min_width = Custom_Slider("Min width", 0.01, 20)
         self.slider_max_width.set_bounded_slider(
             self.slider_min_width, Bounding_Type.MIN)
         self.slider_min_width.set_bounded_slider(
@@ -136,15 +136,15 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         # distribution parameters
         self.slider_total_pots = Custom_Slider(
-            "Total pots", None, 3, 0, 50)
+            "Total pots", None, 10, 0, 50)
         self.slider_rotation_jitter = Custom_Slider(
             "Rotation jitter", None, 180, 0, 360)
         self.slider_pot_angle = Custom_Slider(
-            "Distribution angle", None, 2, 0, 180)
+            "Distribution angle", None, 30, 0, 180)
         self.slider_pot_spacing = Custom_Slider(
-            "Distribution spacing", 0.01, 5, 0, 200)
+            "Distribution spacing", 0.01, 20, 0, 200)
         self.slider_first_pot_spacing = Custom_Slider(
-            "Distance from center", 0.01, 10, 0, 100)
+            "Distance from center", 0.1, 7, 0, 100)
         section_form_layout.addRow(self.slider_total_pots.get_label(),
                                    self.slider_total_pots)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
