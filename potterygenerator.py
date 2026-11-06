@@ -73,20 +73,13 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def create_layout(self):
         self.main_window = QtWidgets.QVBoxLayout()
-        self._form_ui()
+        self._height_section()
         self.create_btn = QtWidgets.QPushButton("Create")
         self.main_window.addWidget(self.create_btn)
         self.setLayout(self.main_window)
 
-    def _form_ui(self):
+    def _height_section(self):
         self.form_lay = QtWidgets.QFormLayout()
-
-        # example double spin box
-        self.torso_rad_dspnbx = QtWidgets.QDoubleSpinBox()
-        self.torso_rad_dspnbx.setValue(0.5)
-
-        self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
-
         # height sliders
         self.slider_max_height = Custom_Slider("Max height")
         self.slider_min_height = Custom_Slider("Min height")
@@ -99,7 +92,9 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.form_lay.addRow(
             self.slider_min_height.get_label(), self.slider_min_height)
 
-        self.main_window.addLayout(self.form_lay)
+        self.groupBox = QtWidgets.QGroupBox("Exclusive Radio Buttons")
+        self.groupBox.setLayout(self.form_lay)
+        self.main_window.addLayout(self.groupBox)
 
     '''
     def _fix_slider_position(self):
