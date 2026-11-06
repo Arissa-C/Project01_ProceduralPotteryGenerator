@@ -8,17 +8,17 @@ import random
 
 class Custom_Slider(QtWidgets.QSlider):
     def __init__(self, name: str):
+        super().__init__()
         self.name: str = name
         self.setMinimum(0)
         self.setMaximum(10)
         self.setValue(5)
         self.setOrientation(QtCore.Qt.Horizontal)
         self.set_label()
-        super().__init__()
 
     def set_label(self):
         self.assigned_label = QtWidgets.QLabel()
-        self.label_max_height.setText(
+        self.assigned_label.setText(
             self.name + ": " + str(self.value()))
 
     def get_label(self):
@@ -51,14 +51,14 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
 
         # max height slider
-        self.slider_max_height = Custom_Slider()
+        self.slider_max_height = Custom_Slider("Max height")
 
-        self.slider_max_height.sliderMoved.connect(self._update_slider_text)
-        self.slider_max_height.sliderReleased.connect(
-            self._fix_slider_position)
+        # self.slider_max_height.sliderMoved.connect(self._update_slider_text)
+        # self.slider_max_height.sliderReleased.connect(
+        #    self._fix_slider_position)
 
         self.form_lay.addRow(
-            self.slider_max_height.get_label, self.slider_max_height)
+            self.slider_max_height.get_label(), self.slider_max_height)
 
         self.main_window.addLayout(self.form_lay)
 
