@@ -18,7 +18,7 @@ class Custom_Slider(QtWidgets.QSlider):
         super().__init__()
         self.name: str = name
         self.bounded_slider: QtWidgets.QSlider
-        self.bounded_slider_type: Bounding_Type
+        self.bounded_slider_type: Bounding_Type = Bounding_Type.NONE
 
         self.setRange(min, max)
         self.setValue(value)
