@@ -79,7 +79,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.setLayout(self.main_window)
 
     def create_height_section(self):
-        self.form_layout = QtWidgets.QFormLayout()
+        section_form_layout = QtWidgets.QFormLayout()
 
         # height sliders
         self.slider_max_height = Custom_Slider("Max height")
@@ -88,16 +88,16 @@ class Pottery_GUI(QtWidgets.QDialog):
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
             self.slider_max_height, Bounding_Type.MAX)
-        self.form_layout.addRow(
+        section_form_layout.addRow(
             self.slider_max_height.get_label(), self.slider_max_height)
-        self.form_layout.addRow(
+        section_form_layout.addRow(
             self.slider_min_height.get_label(), self.slider_min_height)
 
         # add sliders to groupbox
-        self.height_group_box = QtWidgets.QGroupBox("Exclusive Radio Buttons")
-        self.height_group_box.setLayout(self.form_layout)
+        height_group_box = QtWidgets.QGroupBox("Pots height")
+        height_group_box.setLayout(section_form_layout)
 
-        return self.height_group_box
+        return height_group_box
 
     '''
     def _fix_slider_position(self):
