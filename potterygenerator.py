@@ -272,7 +272,8 @@ class Pottery():
 
         pot_base_obj, pot_base_node = cmds.polyCylinder(
             name="pot_base", radius=radius, height=height)
-        cmds.xform(rotation=[0, angle, 0], translation=[x_coord, 0, z_coord])
+        cmds.xform(rotation=[0, angle, 0],
+                   translation=[x_coord, height/2, z_coord])
 
         return pot_base_obj
 
