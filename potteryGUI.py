@@ -1,10 +1,15 @@
 import maya.OpenMayaUI as omui
-
-from PySide2 import QtWidgets, QtCore
-from shiboken2 import wrapInstance
+import importlib
+import customsliderGUI
+import potterygenerator
 
 from customsliderGUI import Bounding_Type, Custom_Slider
 from potterygenerator import Pottery
+from PySide2 import QtWidgets, QtCore
+from shiboken2 import wrapInstance
+
+importlib.reload(customsliderGUI)
+importlib.reload(potterygenerator)
 
 
 def get_main_maya_window():
