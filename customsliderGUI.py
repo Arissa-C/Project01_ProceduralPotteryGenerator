@@ -11,6 +11,7 @@ class Bounding_Type(Enum):
 
 
 class Custom_Slider(QtWidgets.QSlider):
+
     def __init__(self, name: str, scaling=None, value=100, min=0, max=200):
         super().__init__()
 
