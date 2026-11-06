@@ -6,6 +6,14 @@ import maya.cmds as cmds
 import random
 
 
+class Labeled_Slider(QtWidgets.QSlider):
+    def __init__(self):
+        super().__init__()
+
+    def valueChanged(value):
+        super().valueChanged(value)
+
+
 class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
@@ -29,12 +37,13 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.torso_rad_dspnbx.setValue(0.5)
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
         # test slider
-        self.slider_test = QtWidgets.QSlider()
+        self.slider_test = Labeled_Slider()
         self.slider_test.setMinimum(0)
         self.slider_test.setMaximum(10)
         self.slider_test.setSingleStep(0.1)
         self.slider_test.setPageStep(1)
         self.slider_test.setValue(5)
+        self.slider_test.setOrientation(QtCore.Qt.Horizontal)
         self.form_lay.addRow("Test slider", self.slider_test)
 
         self.main_window.addLayout(self.form_lay)
@@ -146,3 +155,8 @@ class Pottery():
         height = random.uniform(min_height, max_height)
         radius = random.uniform(min_radius, max_radius)
         return (height, radius)
+
+
+# Create objects and run
+potterygui1 = Pottery_GUI()
+potterygui1.show()
