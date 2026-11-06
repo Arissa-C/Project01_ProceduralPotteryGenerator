@@ -134,7 +134,6 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # distribution parameters
-        # spacing_between_pots, slider? double spin box?
         # first_pot_spacing, slider? double spin box?
         self.slider_total_pots = Custom_Slider(
             "Total pots", None, 0, 50, 3)
@@ -142,12 +141,16 @@ class Pottery_GUI(QtWidgets.QDialog):
             "Rotation jitter", None, 0, 360, 180)
         self.slider_pot_angle = Custom_Slider(
             "Dist. angle", None, 0, 180, 2)
+        self.slider_pot_spacing = Custom_Slider(
+            "Dist. spacing", 0.1, 0, 200, 10)
         section_form_layout.addRow(self.slider_total_pots.get_label(),
                                    self.slider_total_pots)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
                                    self.slider_rotation_jitter)
         section_form_layout.addRow(self.slider_pot_angle.get_label(),
                                    self.slider_pot_angle)
+        section_form_layout.addRow(self.slider_pot_spacing.get_label(),
+                                   self.slider_pot_spacing)
 
         # add parameters to groupbox
         section_group_box = QtWidgets.QGroupBox("Pots distribution")
