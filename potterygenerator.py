@@ -14,7 +14,10 @@ class Custom_Slider(QtWidgets.QSlider):
         self.setMaximum(10)
         self.setValue(5)
         self.setOrientation(QtCore.Qt.Horizontal)
+
         self.set_label()
+        self.sliderMoved.connect(self.update_slider_text)
+        self.sliderReleased.connect(self.enforce_slider_bounds)
 
     def set_label(self):
         self.assigned_label = QtWidgets.QLabel()
@@ -23,6 +26,13 @@ class Custom_Slider(QtWidgets.QSlider):
 
     def get_label(self):
         return self.assigned_label
+
+    def update_slider_text(self, position):
+        self.assigned_label.setText(
+            self.name + ": " + str(position))
+
+    def enforce_slider_bounds(self):
+        pass
 
 
 class Pottery_GUI(QtWidgets.QDialog):
@@ -52,20 +62,12 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         # max height slider
         self.slider_max_height = Custom_Slider("Max height")
-
-        # self.slider_max_height.sliderMoved.connect(self._update_slider_text)
-        # self.slider_max_height.sliderReleased.connect(
-        #    self._fix_slider_position)
-
         self.form_lay.addRow(
             self.slider_max_height.get_label(), self.slider_max_height)
 
         self.main_window.addLayout(self.form_lay)
 
     '''
-    def _update_slider_text(self, position):
-        self.label_max_height.setText("Slider value: " + str(position))
-
     def _fix_slider_position(self):
         pass
 
