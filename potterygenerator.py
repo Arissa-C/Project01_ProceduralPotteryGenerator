@@ -24,9 +24,19 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def _form_ui(self):
         self.form_lay = QtWidgets.QFormLayout()
+        # example double spin box
         self.torso_rad_dspnbx = QtWidgets.QDoubleSpinBox()
         self.torso_rad_dspnbx.setValue(0.5)
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
+        # test slider
+        self.slider_test = QtWidgets.QSlider()
+        self.slider_test.setMinimum(0)
+        self.slider_test.setMaximum(10)
+        self.slider_test.setSingleStep(0.1)
+        self.slider_test.setPageStep(1)
+        self.slider_test.setValue(5)
+        self.form_lay.addRow("Test slider", self.slider_test)
+
         self.main_window.addLayout(self.form_lay)
 
     '''
