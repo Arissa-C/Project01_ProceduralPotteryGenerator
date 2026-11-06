@@ -41,28 +41,31 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.slider_test.setOrientation(QtCore.Qt.Horizontal)
 
         self.slider_test.sliderMoved.connect(self._update_slider_text)
-        self.slider_test.sliderReleased.connect(self._expand_slider_bounds)
-        self.form_lay.addRow("Test slider", self.slider_test)
-        
+        # self.slider_test.sliderReleased.connect(self._expand_slider_bounds)
+
         # test label
-        self.label_test = QtWidgets.QLabel()
+        self.label_test = QtWidgets.QLabel(self.slider_test)
         self.label_test.setFrameStyle(
             QtWidgets.QFrame.Panel | QtWidgets.QFrame.Sunken)
-        self.label_test.setText("first line\nsecond line")
-        self.form_lay.addRow(self.label_test)
+        self.label_test.setAlignment(
+            QtCore.Qt.AlignCenter | QtCore.Qt.AlignCenter)
+        self.label_test.setText(
+            "Slider value: " + str(self.slider_test.value()))
+
+        self.form_lay.addRow(self.label_test, self.slider_test)
 
         self.main_window.addLayout(self.form_lay)
 
     def _update_slider_text(self, position):
-        self.label_test.setText(str(position))
+        self.label_test.setText("Slider value: " + str(position))
 
+    '''
     def _expand_slider_bounds(self):
         if self.slider_test.value() == self.slider_test.maximum():
             old_position = self.slider_test.value()
             self.slider_test.setMaximum(self.slider_test.maximum() * 2)
             self.slider_test.setValue(old_position)
 
-    '''
     def create_connections(self):
         self.create_btn.clicked.connect(self.create)
 
