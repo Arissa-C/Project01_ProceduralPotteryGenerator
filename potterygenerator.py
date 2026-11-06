@@ -14,9 +14,10 @@ class Bounding_Type(Enum):
 
 
 class Custom_Slider(QtWidgets.QSlider):
-    def __init__(self, name: str, min=0, max=20, value=10):
+    def __init__(self, name: str, scaling=None, min=0, max=200, value=100):
         super().__init__()
         self.name: str = name
+        self.scaling = scaling
         self.bounded_slider: QtWidgets.QSlider
         self.bounded_slider_type: Bounding_Type = Bounding_Type.NONE
 
@@ -28,17 +29,23 @@ class Custom_Slider(QtWidgets.QSlider):
         self.sliderMoved.connect(self.update_slider_text)
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
+    def get_scaled_value(self):
+        if self.scaling:
+            return self.value()*self.scaling
+        return self.value()
+
     def set_label(self):
         self.assigned_label = QtWidgets.QLabel()
         self.assigned_label.setText(
-            self.name + ": " + str(self.value()))
+            self.name + ": " + str(self.get_scaled_value()))
 
     def get_label(self):
         return self.assigned_label
 
     def update_slider_text(self, position):
+        self.scaled_value = self.value()*self.scaling
         self.assigned_label.setText(
-            self.name + ": " + str(position))
+            self.name + ": " + str(self.get_scaled_value()))
 
     def set_bounded_slider(
             self, slider: QtWidgets.QSlider, type: Bounding_Type):
@@ -86,8 +93,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # height sliders
-        self.slider_max_height = Custom_Slider("Max height")
-        self.slider_min_height = Custom_Slider("Min height")
+        self.slider_max_height = Custom_Slider("Max height", 0.1)
+        self.slider_min_height = Custom_Slider("Min height", 0.1)
         self.slider_max_height.set_bounded_slider(
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
@@ -107,8 +114,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # width sliders
-        self.slider_max_width = Custom_Slider("Max width")
-        self.slider_min_width = Custom_Slider("Min width")
+        self.slider_max_width = Custom_Slider("Max width", 0.1)
+        self.slider_min_width = Custom_Slider("Min width", 0.1)
         self.slider_max_width.set_bounded_slider(
             self.slider_min_width, Bounding_Type.MIN)
         self.slider_min_width.set_bounded_slider(
@@ -130,12 +137,15 @@ class Pottery_GUI(QtWidgets.QDialog):
         # distribution parameters
         # total_pots, slider? double spin box?
         # spacing_between_pots, slider? double spin box?
-        # angle_between_pots, slider
         # first_pot_spacing, slider? double spin box?
         self.slider_rotation_jitter = Custom_Slider(
-            "Rotation jitter", 0, 360, 180)
+            "Rotation jitter", None, 0, 360, 180)
+        self.slider_pot_angle = Custom_Slider(
+            "Distribution angle", None, 0, 180, 2)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
                                    self.slider_rotation_jitter)
+        section_form_layout.addRow(self.slider_pot_angle.get_label(),
+                                   self.slider_pot_angle)
 
         # add parameters to groupbox
         section_group_box = QtWidgets.QGroupBox("Pots distribution")
