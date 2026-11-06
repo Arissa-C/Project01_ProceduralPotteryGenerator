@@ -14,7 +14,7 @@ class Bounding_Type(Enum):
 
 
 class Custom_Slider(QtWidgets.QSlider):
-    def __init__(self, name: str, scaling=None, min=0, max=200, value=100):
+    def __init__(self, name: str, scaling=None, min=0, max=20, value=10):
         super().__init__()
         self.name: str = name
         self.scaling = scaling
@@ -26,26 +26,27 @@ class Custom_Slider(QtWidgets.QSlider):
         self.setOrientation(QtCore.Qt.Horizontal)
 
         self.set_label()
-        self.sliderMoved.connect(self.update_slider_text)
+        self.valueChanged.connect(self.update_slider_text)
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
+    '''
     def get_scaled_value(self):
         if self.scaling:
-            return self.value()*self.scaling
+            return format(self.value()*self.scaling, '.1f')
         return self.value()
+    '''
 
     def set_label(self):
         self.assigned_label = QtWidgets.QLabel()
         self.assigned_label.setText(
-            self.name + ": " + str(self.get_scaled_value()))
+            self.name + ": " + str(self.value()))
 
     def get_label(self):
         return self.assigned_label
 
     def update_slider_text(self, position):
-        self.scaled_value = self.value()*self.scaling
         self.assigned_label.setText(
-            self.name + ": " + str(self.get_scaled_value()))
+            self.name + ": " + str(position) + " " + str(self.value()))
 
     def set_bounded_slider(
             self, slider: QtWidgets.QSlider, type: Bounding_Type):
