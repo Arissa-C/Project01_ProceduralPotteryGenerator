@@ -20,8 +20,8 @@ class Custom_Slider(QtWidgets.QSlider):
         self.bounded_slider_type: Bounding_Type
 
         self.setMinimum(0)
-        self.setMaximum(10)
-        self.setValue(5)
+        self.setMaximum(20)
+        self.setValue(10)
         self.setOrientation(QtCore.Qt.Horizontal)
 
         self.set_label()
@@ -118,7 +118,7 @@ class Pottery_GUI(QtWidgets.QDialog):
             self.slider_min_width.get_label(), self.slider_min_width)
 
         # add sliders to groupbox
-        section_group_box = QtWidgets.QGroupBox("Pots width")
+        section_group_box = QtWidgets.QGroupBox("Pots width (radius)")
         section_group_box.setLayout(section_form_layout)
 
         return section_group_box
