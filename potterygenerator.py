@@ -1,15 +1,24 @@
 import math
 
 from PySide2 import QtWidgets, QtCore
+from enum import Enum
 
 import maya.cmds as cmds
 import random
+
+
+class Bounding_Type(Enum):
+    MIN = 0
+    MAX = 1
 
 
 class Custom_Slider(QtWidgets.QSlider):
     def __init__(self, name: str):
         super().__init__()
         self.name: str = name
+        self.bounding_slider: QtWidgets.QSlider
+        self.bounding_slider_type: Bounding_Type
+
         self.setMinimum(0)
         self.setMaximum(10)
         self.setValue(5)
@@ -31,8 +40,16 @@ class Custom_Slider(QtWidgets.QSlider):
         self.assigned_label.setText(
             self.name + ": " + str(position))
 
+    def set_bounding_slider(
+            self, slider: QtWidgets.QSlider, type: Bounding_Type):
+        self.bounding_slider = slider
+        self.bounding_slider_type = type
+
     def enforce_slider_bounds(self):
-        pass
+        if self.bounding_slider_type is Bounding_Type.MAX:
+            self.setMaximum(self.bounding_slider.value())
+        elif self.bounding_slider_type is Bounding_Type.MIN:
+            self.setMinimum(self.bounding_slider.value())
 
 
 class Pottery_GUI(QtWidgets.QDialog):
@@ -60,10 +77,17 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
 
-        # max height slider
+        # height sliders
         self.slider_max_height = Custom_Slider("Max height")
+        self.slider_min_height = Custom_Slider("Min height")
+        self.slider_max_height.set_bounding_slider(
+            self.slider_min_height, Bounding_Type.MIN)
+        self.slider_min_height.set_bounding_slider(
+            self.slider_max_height, Bounding_Type.MAX)
         self.form_lay.addRow(
             self.slider_max_height.get_label(), self.slider_max_height)
+        self.form_lay.addRow(
+            self.slider_min_height.get_label(), self.slider_min_height)
 
         self.main_window.addLayout(self.form_lay)
 
