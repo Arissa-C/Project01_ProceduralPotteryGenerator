@@ -84,6 +84,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.main_window.addWidget(self.create_width_section())
         self.main_window.addWidget(self.create_distribution_section())
 
+        self.main_window.addWidget(self.create_group_name_edit())
         self.create_btn = QtWidgets.QPushButton("Create")
         self.main_window.addWidget(self.create_btn)
         self.setLayout(self.main_window)
@@ -160,6 +161,10 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_group_box.setLayout(section_form_layout)
 
         return section_group_box
+
+    def create_group_name_edit(self):
+        self.group_name_edit = QtWidgets.QLineEdit()
+        return self.group_name_edit
 
     '''
     def _fix_slider_position(self):
