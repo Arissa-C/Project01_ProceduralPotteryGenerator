@@ -6,20 +6,6 @@ import maya.cmds as cmds
 import random
 
 
-class Labeled_Slider(QtWidgets.QSlider):
-    def __init__(self):
-        super().__init__()
-
-    def set_value_label(self, value_label: QtWidgets.QLabel):
-        self.value_label: QtWidgets.QLabel = value_label
-        self.value_label.setText("Slider value: " + str(self.value()))
-
-    def sliderMoved(position):
-        # self.value_label.setText(str(self.value()))
-        print("HELLO")
-        super().sliderMoved(position)
-
-
 class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
@@ -38,13 +24,15 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def _form_ui(self):
         self.form_lay = QtWidgets.QFormLayout()
+
         # example double spin box
         self.torso_rad_dspnbx = QtWidgets.QDoubleSpinBox()
         self.torso_rad_dspnbx.setValue(0.5)
+
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
+
         # test slider
         self.slider_test = QtWidgets.QSlider()
-
         self.slider_test.setMinimum(0)
         self.slider_test.setMaximum(10)
         self.slider_test.setSingleStep(0.1)
@@ -53,8 +41,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.slider_test.setOrientation(QtCore.Qt.Horizontal)
 
         self.slider_test.sliderMoved.connect(self._update_slider_text)
-
         self.form_lay.addRow("Test slider", self.slider_test)
+        
         # test label
         self.label_test = QtWidgets.QLabel()
         self.label_test.setFrameStyle(
