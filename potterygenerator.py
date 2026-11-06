@@ -72,6 +72,7 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
         super().__init__()
+        self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
         self.create_layout()
         self.create_connections()
@@ -179,7 +180,6 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     @QtCore.Slot()
     def create(self):
-        self.pottery_generator = Pottery()
         self.pottery_generator.create()
 
 
@@ -200,6 +200,24 @@ class Pottery():
         self.max_radius = 6
         # naming parameters
         self.grp_name = "pots_grp"
+
+    def set_values(self, total_pots,
+                   rotation_jitter,
+                   spacing_between_pots, angle_between_pots,
+                   first_pot_spacing,
+                   min_height, max_height,
+                   min_radius, max_radius, grp_name):
+        self.total_pots, self.rotation_jitter, self.spacing_between_pots, \
+            self.angle_between_pots, self.first_pot_spacing, \
+            self.min_height, self.max_height, \
+            self.min_radius, self.max_radius, \
+            self.grp_name = \
+            (total_pots,
+                rotation_jitter,
+                spacing_between_pots, angle_between_pots,
+                first_pot_spacing,
+                min_height, max_height,
+                min_radius, max_radius, grp_name)
 
     def create(self):
         # creates whole set of pots
