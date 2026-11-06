@@ -8,8 +8,9 @@ import random
 
 
 class Bounding_Type(Enum):
-    MIN = 0
-    MAX = 1
+    NONE = 0
+    MIN = 1
+    MAX = 2
 
 
 class Custom_Slider(QtWidgets.QSlider):
