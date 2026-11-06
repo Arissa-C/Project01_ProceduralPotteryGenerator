@@ -12,6 +12,7 @@ class Labeled_Slider(QtWidgets.QSlider):
 
     def set_value_label(self, value_label: QtWidgets.QLabel):
         self.value_label: QtWidgets.QLabel = value_label
+        self.value_label.setText("Hello")
 
     def valueChanged(self, value):
         if self.value_label:
