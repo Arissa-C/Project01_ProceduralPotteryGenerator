@@ -128,6 +128,10 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # distribution parameters
+        # total_pots, slider? double spin box?
+        # spacing_between_pots, slider? double spin box?
+        # angle_between_pots, slider
+        # first_pot_spacing, slider? double spin box?
         self.slider_rotation_jitter = Custom_Slider(
             "Rotation jitter", 0, 360, 180)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
