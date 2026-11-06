@@ -93,8 +93,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # height sliders
-        self.slider_max_height = Custom_Slider("Max height", 0.1)
-        self.slider_min_height = Custom_Slider("Min height", 0.1)
+        self.slider_max_height = Custom_Slider("Max height", 0.01)
+        self.slider_min_height = Custom_Slider("Min height", 0.01)
         self.slider_max_height.set_bounded_slider(
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
@@ -114,8 +114,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # width sliders
-        self.slider_max_width = Custom_Slider("Max width", 0.1)
-        self.slider_min_width = Custom_Slider("Min width", 0.1)
+        self.slider_max_width = Custom_Slider("Max width", 0.01)
+        self.slider_min_width = Custom_Slider("Min width", 0.01)
         self.slider_max_width.set_bounded_slider(
             self.slider_min_width, Bounding_Type.MIN)
         self.slider_min_width.set_bounded_slider(
@@ -142,9 +142,9 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.slider_pot_angle = Custom_Slider(
             "Distribution angle", None, 2, 0, 180)
         self.slider_pot_spacing = Custom_Slider(
-            "Distribution spacing", 0.1, 5, 0, 200)
+            "Distribution spacing", 0.01, 5, 0, 200)
         self.slider_first_pot_spacing = Custom_Slider(
-            "Distance from center", 0.1, 10, 0, 100)
+            "Distance from center", 0.01, 10, 0, 100)
         section_form_layout.addRow(self.slider_total_pots.get_label(),
                                    self.slider_total_pots)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
@@ -218,7 +218,7 @@ class Pottery():
                    first_pot_spacing,
                    min_height, max_height,
                    min_radius, max_radius, grp_name):
-        # this is the worst thing i've ever seen
+        # behold, the worst single line i've ever written
         self.total_pots, self.rotation_jitter, self.spacing_between_pots, \
             self.angle_between_pots, self.first_pot_spacing, \
             self.min_height, self.max_height, \
