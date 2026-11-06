@@ -14,7 +14,7 @@ class Bounding_Type(Enum):
 
 
 class Custom_Slider(QtWidgets.QSlider):
-    def __init__(self, name: str, scaling=None, min=0, max=200, value=100):
+    def __init__(self, name: str, scaling=None, value=100, min=0, max=200):
         super().__init__()
         self.name: str = name
         self.scaling = scaling
@@ -134,15 +134,16 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # distribution parameters
-        # first_pot_spacing, slider? double spin box?
         self.slider_total_pots = Custom_Slider(
-            "Total pots", None, 0, 50, 3)
+            "Total pots", None, 3, 0, 50)
         self.slider_rotation_jitter = Custom_Slider(
-            "Rotation jitter", None, 0, 360, 180)
+            "Rotation jitter", None, 180, 0, 360)
         self.slider_pot_angle = Custom_Slider(
-            "Dist. angle", None, 0, 180, 2)
+            "Distribution angle", None, 2, 0, 180)
         self.slider_pot_spacing = Custom_Slider(
-            "Dist. spacing", 0.1, 0, 200, 10)
+            "Distribution spacing", 0.1, 5, 0, 200)
+        self.slider_first_pot_spacing = Custom_Slider(
+            "Distance from center", 0.1, 10, 0, 100)
         section_form_layout.addRow(self.slider_total_pots.get_label(),
                                    self.slider_total_pots)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
@@ -151,6 +152,8 @@ class Pottery_GUI(QtWidgets.QDialog):
                                    self.slider_pot_angle)
         section_form_layout.addRow(self.slider_pot_spacing.get_label(),
                                    self.slider_pot_spacing)
+        section_form_layout.addRow(self.slider_first_pot_spacing.get_label(),
+                                   self.slider_first_pot_spacing)
 
         # add parameters to groupbox
         section_group_box = QtWidgets.QGroupBox("Pots distribution")
