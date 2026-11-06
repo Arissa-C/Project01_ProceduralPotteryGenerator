@@ -10,10 +10,10 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
         super().__init__()
-        self.pottery_generator = Pottery()
+        # self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
         self.create_layout()
-        self.create_connections()
+        # self.create_connections()
 
     def create_layout(self):
         self.main_window = QtWidgets.QVBoxLayout()
@@ -29,6 +29,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
         self.main_window.addLayout(self.form_lay)
 
+    '''
     def create_connections(self):
         self.create_btn.clicked.connect(self.create)
 
@@ -36,6 +37,7 @@ class Pottery_GUI(QtWidgets.QDialog):
     def create(self):
         self.pottery_generator.torso_radius = self.torso_rad_dspnbx.value()
         self.pottery_generator.create()
+    '''
 
 
 class Pottery():
