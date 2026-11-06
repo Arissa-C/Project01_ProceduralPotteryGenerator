@@ -31,7 +31,7 @@ class Custom_Slider(QtWidgets.QSlider):
 
     def get_scaled_value(self):
         if self.scaling:
-            return format(self.value()*self.scaling, '.1f')
+            return float(format(self.value()*self.scaling, '.1f'))
         return self.value()
 
     def set_label(self):
@@ -180,6 +180,17 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     @QtCore.Slot()
     def create(self):
+        self.pottery_generator.set_values(
+            self.slider_total_pots.get_scaled_value(),
+            self.slider_rotation_jitter.get_scaled_value(),
+            self.slider_pot_spacing.get_scaled_value(),
+            self.slider_pot_angle.get_scaled_value(),
+            self.slider_first_pot_spacing.get_scaled_value(),
+            self.slider_min_height.get_scaled_value(),
+            self.slider_max_height.get_scaled_value(),
+            self.slider_min_width.get_scaled_value(),
+            self.slider_max_width.get_scaled_value(),
+            self.group_name_edit.text())
         self.pottery_generator.create()
 
 
@@ -207,6 +218,7 @@ class Pottery():
                    first_pot_spacing,
                    min_height, max_height,
                    min_radius, max_radius, grp_name):
+        # this is the worst thing i've ever seen
         self.total_pots, self.rotation_jitter, self.spacing_between_pots, \
             self.angle_between_pots, self.first_pot_spacing, \
             self.min_height, self.max_height, \
