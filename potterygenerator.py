@@ -1,16 +1,23 @@
 import math
 
 from PySide2 import QtWidgets, QtCore
+from shiboken2 import wrapInstance
 from enum import Enum
 
 import maya.cmds as cmds
 import random
+import maya.OpenMayaUI as omui
 
 
 class Bounding_Type(Enum):
     NONE = 0
     MIN = 1
     MAX = 2
+
+
+def get_main_maya_window():
+    main_window = omui.MQtUtil.mainWindow()
+    return wrapInstance(int(main_window), QtWidgets.QWidget)
 
 
 class Custom_Slider(QtWidgets.QSlider):
@@ -71,9 +78,10 @@ class Custom_Slider(QtWidgets.QSlider):
 class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
-        super().__init__()
+        super().__init__(parent=get_main_maya_window())
         self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
+        self.setWindowFlag(QtCore.Qt.WindowType.Tool)
         self.create_layout()
         self.create_connections()
 
