@@ -73,13 +73,14 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def create_layout(self):
         self.main_window = QtWidgets.QVBoxLayout()
-        self._height_section()
+        self.main_window.addWidget(self.create_height_section())
         self.create_btn = QtWidgets.QPushButton("Create")
         self.main_window.addWidget(self.create_btn)
         self.setLayout(self.main_window)
 
-    def _height_section(self):
-        self.form_lay = QtWidgets.QFormLayout()
+    def create_height_section(self):
+        self.form_layout = QtWidgets.QFormLayout()
+
         # height sliders
         self.slider_max_height = Custom_Slider("Max height")
         self.slider_min_height = Custom_Slider("Min height")
@@ -87,14 +88,16 @@ class Pottery_GUI(QtWidgets.QDialog):
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
             self.slider_max_height, Bounding_Type.MAX)
-        self.form_lay.addRow(
+        self.form_layout.addRow(
             self.slider_max_height.get_label(), self.slider_max_height)
-        self.form_lay.addRow(
+        self.form_layout.addRow(
             self.slider_min_height.get_label(), self.slider_min_height)
 
-        self.groupBox = QtWidgets.QGroupBox("Exclusive Radio Buttons")
-        self.groupBox.setLayout(self.form_lay)
-        self.main_window.addLayout(self.groupBox)
+        # add sliders to groupbox
+        self.height_group_box = QtWidgets.QGroupBox("Exclusive Radio Buttons")
+        self.height_group_box.setLayout(self.form_layout)
+
+        return self.height_group_box
 
     '''
     def _fix_slider_position(self):
