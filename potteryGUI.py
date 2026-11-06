@@ -28,6 +28,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.create_connections()
 
     def create_layout(self):
+        # Overall window layout, smaller sections and widgets added here
         self.main_window = QtWidgets.QVBoxLayout()
 
         self.main_window.addWidget(self.create_height_section())
@@ -40,6 +41,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.setLayout(self.main_window)
 
     def create_height_section(self):
+        # pot height related widgets, enclosed in a groupbox
         section_form_layout = QtWidgets.QFormLayout()
 
         # height sliders
@@ -61,6 +63,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         return section_group_box
 
     def create_width_section(self):
+        # pot width related widgets, enclosed in a groupbox
         section_form_layout = QtWidgets.QFormLayout()
 
         # width sliders
@@ -82,6 +85,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         return section_group_box
 
     def create_distribution_section(self):
+        # pot distribution related widgets, enclosed in a groupbox
         section_form_layout = QtWidgets.QFormLayout()
 
         # distribution parameters
@@ -113,10 +117,12 @@ class Pottery_GUI(QtWidgets.QDialog):
         return section_group_box
 
     def create_group_name_edit(self):
+        # QLineEdit widget that lets user change group name
         section_form_layout = QtWidgets.QFormLayout()
 
         self.group_name_edit = QtWidgets.QLineEdit()
         self.group_name_edit.setMaxLength(50)
+        # need to set input validator
         self.group_name_edit.setText("pots_grp")
 
         self.group_name_label = QtWidgets.QLabel()
@@ -130,6 +136,8 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     @QtCore.Slot()
     def create(self):
+        # when create button is clicked
+        # send values to potterygenerator and create pot set
         self.pottery_generator.set_values(
             self.slider_total_pots.get_scaled_value(),
             self.slider_rotation_jitter.get_scaled_value(),
