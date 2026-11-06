@@ -14,7 +14,7 @@ class Bounding_Type(Enum):
 
 
 class Custom_Slider(QtWidgets.QSlider):
-    def __init__(self, name: str, scaling=None, min=0, max=20, value=10):
+    def __init__(self, name: str, scaling=None, min=0, max=200, value=100):
         super().__init__()
         self.name: str = name
         self.scaling = scaling
@@ -29,24 +29,22 @@ class Custom_Slider(QtWidgets.QSlider):
         self.valueChanged.connect(self.update_slider_text)
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
-    '''
     def get_scaled_value(self):
         if self.scaling:
             return format(self.value()*self.scaling, '.1f')
         return self.value()
-    '''
 
     def set_label(self):
         self.assigned_label = QtWidgets.QLabel()
         self.assigned_label.setText(
-            self.name + ": " + str(self.value()))
+            self.name + ": " + str(self.get_scaled_value()))
 
     def get_label(self):
         return self.assigned_label
 
-    def update_slider_text(self, position):
+    def update_slider_text(self, value):
         self.assigned_label.setText(
-            self.name + ": " + str(position) + " " + str(self.value()))
+            self.name + ": " + str(self.get_scaled_value()))
 
     def set_bounded_slider(
             self, slider: QtWidgets.QSlider, type: Bounding_Type):
@@ -136,13 +134,16 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # distribution parameters
-        # total_pots, slider? double spin box?
         # spacing_between_pots, slider? double spin box?
         # first_pot_spacing, slider? double spin box?
+        self.slider_total_pots = Custom_Slider(
+            "Total pots", None, 0, 50, 3)
         self.slider_rotation_jitter = Custom_Slider(
             "Rotation jitter", None, 0, 360, 180)
         self.slider_pot_angle = Custom_Slider(
-            "Distribution angle", None, 0, 180, 2)
+            "Dist. angle", None, 0, 180, 2)
+        section_form_layout.addRow(self.slider_total_pots.get_label(),
+                                   self.slider_total_pots)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
                                    self.slider_rotation_jitter)
         section_form_layout.addRow(self.slider_pot_angle.get_label(),
