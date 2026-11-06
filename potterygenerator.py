@@ -12,12 +12,12 @@ class Labeled_Slider(QtWidgets.QSlider):
 
     def set_value_label(self, value_label: QtWidgets.QLabel):
         self.value_label: QtWidgets.QLabel = value_label
-        self.value_label.setText("Hello")
+        self.value_label.setText("Slider value: " + str(self.value()))
 
-    def valueChanged(self, value):
-        if self.value_label:
-            self.value_label.setText(str(value))
-        super().valueChanged(value)
+    def sliderMoved(position):
+        # self.value_label.setText(str(self.value()))
+        print("HELLO")
+        super().sliderMoved(position)
 
 
 class Pottery_GUI(QtWidgets.QDialog):
@@ -43,13 +43,17 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.torso_rad_dspnbx.setValue(0.5)
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
         # test slider
-        self.slider_test = Labeled_Slider()
+        self.slider_test = QtWidgets.QSlider()
+
         self.slider_test.setMinimum(0)
         self.slider_test.setMaximum(10)
         self.slider_test.setSingleStep(0.1)
         self.slider_test.setPageStep(1)
         self.slider_test.setValue(5)
         self.slider_test.setOrientation(QtCore.Qt.Horizontal)
+
+        self.slider_test.sliderMoved.connect(self._update_slider_text)
+
         self.form_lay.addRow("Test slider", self.slider_test)
         # test label
         self.label_test = QtWidgets.QLabel()
@@ -57,9 +61,11 @@ class Pottery_GUI(QtWidgets.QDialog):
             QtWidgets.QFrame.Panel | QtWidgets.QFrame.Sunken)
         self.label_test.setText("first line\nsecond line")
         self.form_lay.addRow(self.label_test)
-        self.slider_test.set_value_label(self.label_test)
 
         self.main_window.addLayout(self.form_lay)
+
+    def _update_slider_text(self, position):
+        self.label_test.setText(str(position))
 
     '''
     def create_connections(self):
