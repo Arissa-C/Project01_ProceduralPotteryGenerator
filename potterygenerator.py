@@ -6,6 +6,15 @@ import maya.cmds as cmds
 import random
 
 
+class Custom_Slider(QtWidgets.QSlider):
+    def __init__(self):
+        self.setMinimum(0)
+        self.setMaximum(10)
+        self.setValue(5)
+        self.setOrientation(QtCore.Qt.Horizontal)
+        super().__init__()
+
+
 class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
@@ -31,41 +40,41 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         self.form_lay.addRow("Torso radius", self.torso_rad_dspnbx)
 
-        # test slider
-        self.slider_test = QtWidgets.QSlider()
-        self.slider_test.setMinimum(0)
-        self.slider_test.setMaximum(10)
-        self.slider_test.setSingleStep(0.1)
-        self.slider_test.setPageStep(1)
-        self.slider_test.setValue(5)
-        self.slider_test.setOrientation(QtCore.Qt.Horizontal)
+        # max height slider
+        self.slider_max_height = Custom_Slider()
 
-        self.slider_test.sliderMoved.connect(self._update_slider_text)
-        # self.slider_test.sliderReleased.connect(self._expand_slider_bounds)
+        self.slider_max_height.sliderMoved.connect(self._update_slider_text)
+        self.slider_max_height.sliderReleased.connect(
+            self._fix_slider_position)
 
-        # test label
-        self.label_test = QtWidgets.QLabel(self.slider_test)
-        self.label_test.setFrameStyle(
-            QtWidgets.QFrame.Panel | QtWidgets.QFrame.Sunken)
-        self.label_test.setAlignment(
-            QtCore.Qt.AlignCenter | QtCore.Qt.AlignCenter)
-        self.label_test.setText(
-            "Slider value: " + str(self.slider_test.value()))
+        # max height label
+        self.label_max_height = QtWidgets.QLabel(self.slider_max_height)
+        self.label_max_height.setText(
+            "Slider value: " + str(self.slider_max_height.value()))
 
-        self.form_lay.addRow(self.label_test, self.slider_test)
+        # min height slider
+        self.slider_min_height = Custom_Slider()
+
+        self.slider_min_height.sliderMoved.connect(self._update_slider_text)
+        self.slider_min_height.sliderReleased.connect(
+            self._fix_slider_position)
+
+        # min height label
+        self.label_min_height = QtWidgets.QLabel(self.slider_min_height)
+        self.label_min_height.setText(
+            "Slider value: " + str(self.slider_min_height.value()))
+
+        self.form_lay.addRow(self.label_max_height, self.slider_max_height)
 
         self.main_window.addLayout(self.form_lay)
 
     def _update_slider_text(self, position):
-        self.label_test.setText("Slider value: " + str(position))
+        self.label_max_height.setText("Slider value: " + str(position))
+
+    def _fix_slider_position(self):
+        pass
 
     '''
-    def _expand_slider_bounds(self):
-        if self.slider_test.value() == self.slider_test.maximum():
-            old_position = self.slider_test.value()
-            self.slider_test.setMaximum(self.slider_test.maximum() * 2)
-            self.slider_test.setValue(old_position)
-
     def create_connections(self):
         self.create_btn.clicked.connect(self.create)
 
