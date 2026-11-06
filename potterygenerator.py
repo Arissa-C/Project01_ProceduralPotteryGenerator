@@ -72,10 +72,9 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
         super().__init__()
-        # self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
         self.create_layout()
-        # self.create_connections()
+        self.create_connections()
 
     def create_layout(self):
         self.main_window = QtWidgets.QVBoxLayout()
@@ -175,18 +174,13 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout.addRow(self.group_name_label, self.group_name_edit)
         return section_form_layout
 
-    '''
-    def _fix_slider_position(self):
-        pass
-
     def create_connections(self):
         self.create_btn.clicked.connect(self.create)
 
     @QtCore.Slot()
     def create(self):
-        self.pottery_generator.torso_radius = self.torso_rad_dspnbx.value()
+        self.pottery_generator = Pottery()
         self.pottery_generator.create()
-    '''
 
 
 class Pottery():
@@ -205,8 +199,7 @@ class Pottery():
         self.min_radius = 1
         self.max_radius = 6
         # naming parameters
-        self.grp_name = "potSet"
-        pass
+        self.grp_name = "pots_grp"
 
     def create(self):
         # creates whole set of pots
