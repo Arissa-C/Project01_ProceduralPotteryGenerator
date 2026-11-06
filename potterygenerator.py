@@ -13,15 +13,14 @@ class Bounding_Type(Enum):
 
 
 class Custom_Slider(QtWidgets.QSlider):
-    def __init__(self, name: str):
+    def __init__(self, name: str, min=0, max=20, value=10):
         super().__init__()
         self.name: str = name
         self.bounded_slider: QtWidgets.QSlider
         self.bounded_slider_type: Bounding_Type
 
-        self.setMinimum(0)
-        self.setMaximum(20)
-        self.setValue(10)
+        self.setRange(min, max)
+        self.setValue(value)
         self.setOrientation(QtCore.Qt.Horizontal)
 
         self.set_label()
@@ -76,6 +75,7 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         self.main_window.addWidget(self.create_height_section())
         self.main_window.addWidget(self.create_width_section())
+        self.main_window.addWidget(self.create_distribution_section())
 
         self.create_btn = QtWidgets.QPushButton("Create")
         self.main_window.addWidget(self.create_btn)
@@ -119,6 +119,21 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         # add sliders to groupbox
         section_group_box = QtWidgets.QGroupBox("Pots width (radius)")
+        section_group_box.setLayout(section_form_layout)
+
+        return section_group_box
+
+    def create_distribution_section(self):
+        section_form_layout = QtWidgets.QFormLayout()
+
+        # distribution parameters
+        self.slider_rotation_jitter = Custom_Slider(
+            "Rotation jitter", 0, 360, 180)
+        section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
+                                   self.slider_rotation_jitter)
+
+        # add parameters to groupbox
+        section_group_box = QtWidgets.QGroupBox("Pots distribution")
         section_group_box.setLayout(section_form_layout)
 
         return section_group_box
