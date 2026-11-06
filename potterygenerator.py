@@ -73,7 +73,10 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def create_layout(self):
         self.main_window = QtWidgets.QVBoxLayout()
+
         self.main_window.addWidget(self.create_height_section())
+        self.main_window.addWidget(self.create_width_section())
+
         self.create_btn = QtWidgets.QPushButton("Create")
         self.main_window.addWidget(self.create_btn)
         self.setLayout(self.main_window)
@@ -94,10 +97,31 @@ class Pottery_GUI(QtWidgets.QDialog):
             self.slider_min_height.get_label(), self.slider_min_height)
 
         # add sliders to groupbox
-        height_group_box = QtWidgets.QGroupBox("Pots height")
-        height_group_box.setLayout(section_form_layout)
+        section_group_box = QtWidgets.QGroupBox("Pots height")
+        section_group_box.setLayout(section_form_layout)
 
-        return height_group_box
+        return section_group_box
+
+    def create_width_section(self):
+        section_form_layout = QtWidgets.QFormLayout()
+
+        # width sliders
+        self.slider_max_width = Custom_Slider("Max width")
+        self.slider_min_width = Custom_Slider("Min width")
+        self.slider_max_width.set_bounded_slider(
+            self.slider_min_width, Bounding_Type.MIN)
+        self.slider_min_width.set_bounded_slider(
+            self.slider_max_width, Bounding_Type.MAX)
+        section_form_layout.addRow(
+            self.slider_max_width.get_label(), self.slider_max_width)
+        section_form_layout.addRow(
+            self.slider_min_width.get_label(), self.slider_min_width)
+
+        # add sliders to groupbox
+        section_group_box = QtWidgets.QGroupBox("Pots width")
+        section_group_box.setLayout(section_form_layout)
+
+        return section_group_box
 
     '''
     def _fix_slider_position(self):
