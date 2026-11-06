@@ -16,8 +16,8 @@ class Custom_Slider(QtWidgets.QSlider):
     def __init__(self, name: str):
         super().__init__()
         self.name: str = name
-        self.bounding_slider: QtWidgets.QSlider
-        self.bounding_slider_type: Bounding_Type
+        self.bounded_slider: QtWidgets.QSlider
+        self.bounded_slider_type: Bounding_Type
 
         self.setMinimum(0)
         self.setMaximum(10)
@@ -40,16 +40,26 @@ class Custom_Slider(QtWidgets.QSlider):
         self.assigned_label.setText(
             self.name + ": " + str(position))
 
-    def set_bounding_slider(
+    def set_bounded_slider(
             self, slider: QtWidgets.QSlider, type: Bounding_Type):
-        self.bounding_slider = slider
-        self.bounding_slider_type = type
+        self.bounded_slider = slider
+        self.bounded_slider_type = type
+        if self.bounded_slider_type is Bounding_Type.MAX:
+            self.setMaximum(self.bounded_slider.value())
+        elif self.bounded_slider_type is Bounding_Type.MIN:
+            self.setMinimum(self.bounded_slider.value())
 
     def enforce_slider_bounds(self):
-        if self.bounding_slider_type is Bounding_Type.MAX:
-            self.setMaximum(self.bounding_slider.value())
-        elif self.bounding_slider_type is Bounding_Type.MIN:
-            self.setMinimum(self.bounding_slider.value())
+        if self.bounded_slider_type is Bounding_Type.MAX:
+            new_min = self.value()
+            self.bounded_slider.setMinimum(new_min)
+            if self.bounded_slider.value() < new_min:
+                self.bounded_slider.setValue(new_min)
+        elif self.bounded_slider_type is Bounding_Type.MIN:
+            new_max = self.value()
+            self.bounded_slider.setMaximum(new_max)
+            if self.bounded_slider.value() > new_max:
+                self.bounded_slider.setValue(new_max)
 
 
 class Pottery_GUI(QtWidgets.QDialog):
@@ -80,9 +90,9 @@ class Pottery_GUI(QtWidgets.QDialog):
         # height sliders
         self.slider_max_height = Custom_Slider("Max height")
         self.slider_min_height = Custom_Slider("Min height")
-        self.slider_max_height.set_bounding_slider(
+        self.slider_max_height.set_bounded_slider(
             self.slider_min_height, Bounding_Type.MIN)
-        self.slider_min_height.set_bounding_slider(
+        self.slider_min_height.set_bounded_slider(
             self.slider_max_height, Bounding_Type.MAX)
         self.form_lay.addRow(
             self.slider_max_height.get_label(), self.slider_max_height)
