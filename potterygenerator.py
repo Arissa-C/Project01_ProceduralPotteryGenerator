@@ -10,7 +10,12 @@ class Labeled_Slider(QtWidgets.QSlider):
     def __init__(self):
         super().__init__()
 
-    def valueChanged(value):
+    def set_value_label(self, value_label: QtWidgets.QLabel):
+        self.value_label: QtWidgets.QLabel = value_label
+
+    def valueChanged(self, value):
+        if self.value_label:
+            self.value_label.setText(str(value))
         super().valueChanged(value)
 
 
@@ -45,6 +50,13 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.slider_test.setValue(5)
         self.slider_test.setOrientation(QtCore.Qt.Horizontal)
         self.form_lay.addRow("Test slider", self.slider_test)
+        # test label
+        self.label_test = QtWidgets.QLabel()
+        self.label_test.setFrameStyle(
+            QtWidgets.QFrame.Panel | QtWidgets.QFrame.Sunken)
+        self.label_test.setText("first line\nsecond line")
+        self.form_lay.addRow(self.label_test)
+        self.slider_test.set_value_label(self.label_test)
 
         self.main_window.addLayout(self.form_lay)
 
