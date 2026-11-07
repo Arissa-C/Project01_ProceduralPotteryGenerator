@@ -126,6 +126,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.group_name_edit = QtWidgets.QLineEdit()
         self.group_name_edit.setMaxLength(50)
         self.group_name_edit.setText("pots_grp")
+        self.group_name_edit.setPlaceholderText(
+            "only alphanumeric and underscores")
 
         self.name_validator = Pottery_Name_Validator()
         self.group_name_edit.setValidator(self.name_validator)
