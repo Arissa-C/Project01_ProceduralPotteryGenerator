@@ -16,17 +16,21 @@ class Pottery_Name_Validator(QtGui.QValidator):
         # Return states:
         # Acceptable = alphanumeric, underscores
         # Intermediate = empty string
-        # Invalid = anything else ESPECIALLY special chars, blank chars
+        # Invalid = anything else, or digit in first position
 
-        # If string is only alphanumeric or underscores, return acceptable
         valid_characters = string.ascii_letters + string.digits + "_"
 
-        if any(input_char in valid_characters for input_char in input_string):
-            return QtGui.QValidator.Acceptable
-
         # If user wants to erase entire string, return intermediate
-        elif not input_string and cursor_position == 0:
+        if not input_string and cursor_position == 0:
             return QtGui.QValidator.Intermediate
+
+        # If number in first position, return invalid
+        if input_string and input_string in string.digits:
+            return QtGui.QValidator.Invalid
+
+        # If string is only alphanumeric or underscores, return acceptable
+        elif any(input_char in valid_characters for input_char in input_string):
+            return QtGui.QValidator.Acceptable
 
         # In all other cases, return invalid
         return QtGui.QValidator.Invalid
