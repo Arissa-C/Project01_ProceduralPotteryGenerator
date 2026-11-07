@@ -29,6 +29,8 @@ class Pottery():
                    min_height, max_height,
                    min_radius, max_radius, grp_name):
         # behold, the worst single line i've ever written
+        # allows external dump of parameters into Pottery properties
+        # to be called before create()
         self.total_pots, self.rotation_jitter, self.spacing_between_pots, \
             self.angle_between_pots, self.first_pot_spacing, \
             self.min_height, self.max_height, \
