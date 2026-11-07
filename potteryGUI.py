@@ -1,5 +1,6 @@
 import maya.OpenMayaUI as omui
 import importlib
+import string
 import customsliderGUI
 import potterygenerator
 import potterynamevalidator
@@ -127,7 +128,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.group_name_edit.setMaxLength(50)
         self.group_name_edit.setText("pots_grp")
         self.group_name_edit.setPlaceholderText(
-            "only alphanumeric and underscores")
+            "Enter group name")
 
         self.name_validator = Pottery_Name_Validator()
         self.group_name_edit.setValidator(self.name_validator)
@@ -138,16 +139,32 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout.addRow(self.group_name_label, self.group_name_edit)
         return section_form_layout
 
+    def check_valid_group_name(self):
+        text_to_check = self.group_name_edit.text()
+
+        # if group name is empty, has digit in first position, or only digits
+        # return False
+        if not text_to_check:
+            return False
+        elif text_to_check[0] in string.digits:
+            return False
+        elif all(chars in string.digits for chars in text_to_check):
+            return False
+
+        # if all checks pass, return True
+        return True
+
     def create_connections(self):
         self.create_btn.clicked.connect(self.create)
 
     @QtCore.Slot()
     def create(self):
-        if not self.group_name_edit.text():
-            print("EMPTY STRING")
-        else:
-            # when create button is clicked
-            # send values to potterygenerator and create pot set
+        # when create button is clicked
+        # check if group name is valid
+        # namevalidator class cannot address intermediate states
+        if self.check_valid_group_name():
+            # if valid, send values to potterygenerator and create pot set
+            self.group_name_label.setText("Group Name")
             self.pottery_generator.set_values(
                 self.slider_total_pots.get_scaled_value(),
                 self.slider_rotation_jitter.get_scaled_value(),
@@ -160,6 +177,8 @@ class Pottery_GUI(QtWidgets.QDialog):
                 self.slider_max_width.get_scaled_value(),
                 self.group_name_edit.text())
             self.pottery_generator.create()
+        else:
+            self.group_name_label.setText("Invalid Name")
 
 
 # Create objects and run
