@@ -27,30 +27,39 @@ class Custom_Slider(QtWidgets.QSlider):
         self.setOrientation(QtCore.Qt.Horizontal)
 
         # handle labels, signal connections
-        self.set_label()
         self.label_decimal_places = self.get_decimal_places_from_scaling()
+        self.set_label()
         self.valueChanged.connect(self.update_slider_text)
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
     def get_decimal_places_from_scaling(self):
         # if scaling is a decimal, return how many decimal places are provided
-        pass
+        if not self.scaling or self.scaling is int:
+            return 0
+        else:
+            return str(self.scaling)[::-1].find('.')
 
     def get_scaled_value(self):
         # scaled value allows me to bypass QSlider being restricted to ints
         # ex. value = 10, scaling = 0.01, scaled_value = 0.1
         # if no scaling, then treat slider as normal and return int value
-        #
-        # need to handle if scaling requires more decimal places than .1f
         if self.scaling:
-            return float(format(self.value()*self.scaling, '.1f'))
+            return float(self.value()*self.scaling)
         return self.value()
+
+    def get_display_value(self):
+        # called by labels
+        # truncates scaled value based on decimal places given in scaling
+        if self.label_decimal_places > 0:
+            return format(self.get_scaled_value(),
+                          '.' + str(self.label_decimal_places) + 'f')
+        return str(self.get_scaled_value())
 
     def set_label(self):
         # create label for slider, displays name and value
         self.assigned_label = QtWidgets.QLabel()
         self.assigned_label.setText(
-            self.name + ": " + str(self.get_scaled_value()))
+            self.name + ": " + self.get_display_value())
 
     def get_label(self):
         # this method mostly used by QFormLayouts in potteryGUI
@@ -60,7 +69,7 @@ class Custom_Slider(QtWidgets.QSlider):
         # connected to QSlider.valueChanged
         # lets label display slider scaled_value
         self.assigned_label.setText(
-            self.name + ": " + str(self.get_scaled_value()))
+            self.name + ": " + self.get_display_value())
 
     def set_bounded_slider(
             self, slider: QtWidgets.QSlider, type: Bounding_Type):
