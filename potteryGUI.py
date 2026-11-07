@@ -2,14 +2,17 @@ import maya.OpenMayaUI as omui
 import importlib
 import customsliderGUI
 import potterygenerator
+import potterynamevalidator
 
 from customsliderGUI import Bounding_Type, Custom_Slider
 from potterygenerator import Pottery
+from potterynamevalidator import Pottery_Name_Validator
 from PySide2 import QtWidgets, QtCore
 from shiboken2 import wrapInstance
 
 importlib.reload(customsliderGUI)
 importlib.reload(potterygenerator)
+importlib.reload(potterynamevalidator)
 
 
 def get_main_maya_window():
@@ -122,7 +125,7 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         self.group_name_edit = QtWidgets.QLineEdit()
         self.group_name_edit.setMaxLength(50)
-        # need to set input validator
+        self.group_name_edit.setValidator(Pottery_Name_Validator)
         self.group_name_edit.setText("pots_grp")
 
         self.group_name_label = QtWidgets.QLabel()
