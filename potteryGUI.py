@@ -34,6 +34,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.default_angle = 30
         self.default_spacing = 20
         self.default_distance = 7
+        self.default_group_name = "myPots"
 
         self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
@@ -142,7 +143,7 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         self.group_name_edit = QtWidgets.QLineEdit()
         self.group_name_edit.setMaxLength(50)
-        self.group_name_edit.setText("myPots")
+        self.group_name_edit.setText(self.default_group_name)
         self.group_name_edit.setPlaceholderText(
             "Cannot be blank or begin with digit")
 
@@ -175,7 +176,16 @@ class Pottery_GUI(QtWidgets.QDialog):
     @QtCore.Slot()
     def reset(self):
         # reset all values to defaults
-        pass
+        self.slider_max_height.setValue(self.default_max_height)
+        self.slider_min_height.setValue(self.default_min_height)
+        self.slider_max_width.setValue(self.default_max_width)
+        self.slider_min_width.setValue(self.default_min_width)
+        self.slider_total_pots.setValue(self.default_total_pots)
+        self.slider_rotation_jitter.setValue(self.default_rotation_jitter)
+        self.slider_pot_angle.setValue(self.default_angle)
+        self.slider_pot_spacing.setValue(self.default_spacing)
+        self.slider_first_pot_spacing.setValue(self.default_distance)
+        self.group_name_edit.setText(self.default_group_name)
 
     @QtCore.Slot()
     def create(self):
