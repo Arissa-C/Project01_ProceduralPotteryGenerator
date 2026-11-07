@@ -25,6 +25,16 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
         super().__init__(parent=get_main_maya_window())
+        self.default_max_height = 70
+        self.default_min_height = 40
+        self.default_max_width = 50
+        self.default_min_width = 20
+        self.default_total_pots = 10
+        self.default_rotation_jitter = 180
+        self.default_angle = 30
+        self.default_spacing = 20
+        self.default_distance = 7
+
         self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
         self.setWindowFlag(QtCore.Qt.WindowType.Tool)
@@ -42,6 +52,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.main_window.addLayout(self.create_group_name_edit())
         self.create_btn = QtWidgets.QPushButton("Create")
         self.main_window.addWidget(self.create_btn)
+        self.reset_btn = QtWidgets.QPushButton("Reset")
+        self.main_window.addWidget(self.reset_btn)
         self.setLayout(self.main_window)
 
     def create_height_section(self):
@@ -49,8 +61,10 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # height sliders
-        self.slider_max_height = Custom_Slider("Max height", 0.01, 70)
-        self.slider_min_height = Custom_Slider("Min height", 0.01, 40)
+        self.slider_max_height = Custom_Slider(
+            "Max height", 0.01, self.default_max_height)
+        self.slider_min_height = Custom_Slider(
+            "Min height", 0.01, self.default_min_height)
         self.slider_max_height.set_bounded_slider(
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
@@ -71,8 +85,10 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # width sliders
-        self.slider_max_width = Custom_Slider("Max width", 0.01, 50)
-        self.slider_min_width = Custom_Slider("Min width", 0.01, 20)
+        self.slider_max_width = Custom_Slider(
+            "Max width", 0.01, self.default_max_width)
+        self.slider_min_width = Custom_Slider(
+            "Min width", 0.01, self.default_min_width)
         self.slider_max_width.set_bounded_slider(
             self.slider_min_width, Bounding_Type.MIN)
         self.slider_min_width.set_bounded_slider(
@@ -94,15 +110,15 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         # distribution parameters
         self.slider_total_pots = Custom_Slider(
-            "Total pots", None, 10, 0, 50)
+            "Total pots", None, self.default_total_pots, 0, 50)
         self.slider_rotation_jitter = Custom_Slider(
-            "Rotation jitter", None, 180, 0, 360)
+            "Rotation jitter", None, self.default_rotation_jitter, 0, 360)
         self.slider_pot_angle = Custom_Slider(
-            "Distribution angle", None, 30, 0, 180)
+            "Distribution angle", None, self.default_angle, 0, 180)
         self.slider_pot_spacing = Custom_Slider(
-            "Distribution spacing", 0.01, 20, 0, 200)
+            "Distribution spacing", 0.01, self.default_spacing, 0, 200)
         self.slider_first_pot_spacing = Custom_Slider(
-            "Distance from center", 0.1, 7, 0, 100)
+            "Distance from center", 0.1, self.default_distance, 0, 100)
         section_form_layout.addRow(self.slider_total_pots.get_label(),
                                    self.slider_total_pots)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),
@@ -154,6 +170,12 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def create_connections(self):
         self.create_btn.clicked.connect(self.create)
+        self.reset_btn.clicked.connect(self.reset)
+
+    @QtCore.Slot()
+    def reset(self):
+        # reset all values to defaults
+        pass
 
     @QtCore.Slot()
     def create(self):
