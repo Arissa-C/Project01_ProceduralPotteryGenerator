@@ -28,8 +28,13 @@ class Custom_Slider(QtWidgets.QSlider):
 
         # handle labels, signal connections
         self.set_label()
+        self.label_decimal_places = self.get_decimal_places_from_scaling()
         self.valueChanged.connect(self.update_slider_text)
         self.sliderReleased.connect(self.enforce_slider_bounds)
+
+    def get_decimal_places_from_scaling(self):
+        # if scaling is a decimal, return how many decimal places are provided
+        pass
 
     def get_scaled_value(self):
         # scaled value allows me to bypass QSlider being restricted to ints
