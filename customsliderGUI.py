@@ -21,9 +21,11 @@ class Custom_Slider(QtWidgets.QSlider):
         self.bounded_slider: QtWidgets.QSlider
         self.bounded_slider_type: Bounding_Type = Bounding_Type.NONE
 
-        # base slider values
-        self.setRange(min, max)
-        self.setValue(value)
+        # remember defaults
+        self.default_value = value
+        self.default_min = min
+        self.default_max = max
+        self.reset_to_defaults()
         self.setOrientation(QtCore.Qt.Horizontal)
 
         # handle labels, signal connections
@@ -31,6 +33,11 @@ class Custom_Slider(QtWidgets.QSlider):
         self.set_label()
         self.valueChanged.connect(self.update_slider_text)
         self.sliderReleased.connect(self.enforce_slider_bounds)
+
+    def reset_to_defaults(self):
+        self.setRange(self.default_min, self.default_max)
+        self.setValue(self.default_value)
+        self.enforce_slider_bounds()
 
     def get_decimal_places_from_scaling(self):
         # if scaling is a decimal, return how many decimal places are provided
