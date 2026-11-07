@@ -22,14 +22,11 @@ class Pottery_Name_Validator(QtGui.QValidator):
         valid_characters = string.ascii_letters + string.digits + "_"
 
         if any(input_char in valid_characters for input_char in input_string):
-            print("Acceptable")
             return QtGui.QValidator.Acceptable
 
         # If user wants to erase entire string, return intermediate
         elif not input_string and cursor_position == 0:
-            print("Intermediate")
             return QtGui.QValidator.Intermediate
 
         # In all other cases, return invalid
-        print("Invalid")
         return QtGui.QValidator.Invalid
