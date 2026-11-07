@@ -125,8 +125,10 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         self.group_name_edit = QtWidgets.QLineEdit()
         self.group_name_edit.setMaxLength(50)
-        self.group_name_edit.setValidator(Pottery_Name_Validator)
         self.group_name_edit.setText("pots_grp")
+
+        self.name_validator = Pottery_Name_Validator()
+        self.group_name_edit.setValidator(self.name_validator)
 
         self.group_name_label = QtWidgets.QLabel()
         self.group_name_label.setText("Group Name")
