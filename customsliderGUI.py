@@ -37,7 +37,7 @@ class Custom_Slider(QtWidgets.QSlider):
     def reset_to_defaults(self):
         self.setRange(self.default_min, self.default_max)
         self.setValue(self.default_value)
-        self.enforce_slider_bounds()
+        self.enforce_own_bounds()
 
     def get_decimal_places_from_scaling(self):
         # if scaling is a decimal, return how many decimal places are provided
@@ -84,7 +84,7 @@ class Custom_Slider(QtWidgets.QSlider):
         self.bounded_slider = slider
         self.bounded_slider_type = type
         # self.enforce_own_bounds()
-        self.enforce_slider_bounds()
+        self.enforce_own_bounds()
 
     def enforce_own_bounds(self):
         '''
