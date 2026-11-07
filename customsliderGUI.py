@@ -89,12 +89,25 @@ class Custom_Slider(QtWidgets.QSlider):
         # this is done by making the value of MIN the lower bound of MAX
         # and value of MAX becomes the lower bound of MIN
 
-        if self.bounded_slider_type is Bounding_Type.MAX:
+        '''
+        # had to change enum comparison via "is" keyword
+        # it used to look like self.bounded_slider_type is Bounding_Type.Max
+        # now, it converts enums to str and check literal equality via ==
+        # this is because out of nowhere, the code here stopped working
+        #
+        # debugging via print isolated that the enum equality booleans
+        # were the problem
+        # in essence, "Bounding_Type.MAX is Bounding_Type.MAX" was
+        # returning false and StackOverflow says its some module import problem
+        # i have no idea what that means or how to fix it
+        # so i will have to be satisfied with this caveman solution
+        '''
+        if str(self.bounded_slider_type) == str(Bounding_Type.MAX):
             new_min = self.value()
             self.bounded_slider.setMinimum(new_min)
             if self.bounded_slider.value() < new_min:
                 self.bounded_slider.setValue(new_min)
-        elif self.bounded_slider_type is Bounding_Type.MIN:
+        elif str(self.bounded_slider_type) == str(Bounding_Type.MIN):
             new_max = self.value()
             self.bounded_slider.setMaximum(new_max)
             if self.bounded_slider.value() > new_max:
