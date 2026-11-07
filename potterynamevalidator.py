@@ -10,5 +10,5 @@ class Pottery_Name_Validator(QtGui.QValidator):
         # Return states:
         # Acceptable = alphanumeric, underscores
         # Intermediate = NONE
-        # Invalid = blank characters (spaces, newline, etc.) special characters
+        # Invalid = anything else ESPECIALLY special chars, blank chars
         return QtGui.QValidator.Acceptable
