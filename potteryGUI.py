@@ -126,7 +126,7 @@ class Pottery_GUI(QtWidgets.QDialog):
 
         self.group_name_edit = QtWidgets.QLineEdit()
         self.group_name_edit.setMaxLength(50)
-        self.group_name_edit.setText("pots_grp")
+        self.group_name_edit.setText("myPots")
         self.group_name_edit.setPlaceholderText(
             "Cannot be blank or begin with digit")
 
