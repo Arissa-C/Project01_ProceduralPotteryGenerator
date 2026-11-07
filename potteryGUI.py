@@ -179,8 +179,10 @@ class Pottery_GUI(QtWidgets.QDialog):
     @QtCore.Slot()
     def reset(self):
         # reset all values to defaults
+        print("reset called")
         for slider in self.all_sliders:
             slider.reset_to_defaults()
+            print("slider reset called")
         self.group_name_edit.setText(self.default_group_name)
         self.group_name_label.setText(self.default_group_label)
 

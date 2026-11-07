@@ -35,9 +35,25 @@ class Custom_Slider(QtWidgets.QSlider):
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
     def reset_to_defaults(self):
+        print("HELLO")
+        slider_to_check = 40
+        if self.default_value == slider_to_check:
+            print(f"current defaults: {self.default_min},\
+                  {self.default_value}, {self.default_max}")
+            print(f"Old values: {self.value()},\
+                  {self.minimum()}, {self.maximum()}")
         self.setRange(self.default_min, self.default_max)
-        self.setValue(self.default_value)
+        if self.default_value == slider_to_check:
+            print(f"New values: {self.value()},\
+                  {self.minimum()}, {self.maximum()}")
         self.enforce_own_bounds()
+        if self.default_value == slider_to_check:
+            print(f"Enforced values: {self.value()},\
+                  {self.minimum()}, {self.maximum()}")
+        self.setValue(self.default_value)
+        if self.default_value == slider_to_check:
+            print(f"Final values: {self.value()},\
+                  {self.minimum()}, {self.maximum()}")
 
     def get_decimal_places_from_scaling(self):
         # if scaling is a decimal, return how many decimal places are provided
