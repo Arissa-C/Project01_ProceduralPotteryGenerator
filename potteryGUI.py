@@ -128,7 +128,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.group_name_edit.setMaxLength(50)
         self.group_name_edit.setText("pots_grp")
         self.group_name_edit.setPlaceholderText(
-            "Enter group name")
+            "Cannot be blank or begin with digit")
 
         self.name_validator = Pottery_Name_Validator()
         self.group_name_edit.setValidator(self.name_validator)
@@ -142,13 +142,11 @@ class Pottery_GUI(QtWidgets.QDialog):
     def check_valid_group_name(self):
         text_to_check = self.group_name_edit.text()
 
-        # if group name is empty, has digit in first position, or only digits
+        # if group name is empty, has digit in first position
         # return False
         if not text_to_check:
             return False
         elif text_to_check[0] in string.digits:
-            return False
-        elif all(chars in string.digits for chars in text_to_check):
             return False
 
         # if all checks pass, return True
