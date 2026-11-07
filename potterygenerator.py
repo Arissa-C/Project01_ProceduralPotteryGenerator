@@ -86,7 +86,7 @@ class Pottery():
         # create torus pot mouth based on same arguments
         pot_mouth_obj = self.create_pot_mouth(radius, angle,
                                               [x_coord,
-                                               height+radius,
+                                               height+(radius*0.9),
                                                z_coord])
 
         pot_group = cmds.group([pot_base_obj,
@@ -109,8 +109,8 @@ class Pottery():
 
     def create_pot_mouth(self, radius, rotation, translation):
         # create torus of smaller radius as base cylinder
-        major_radius = radius/3
-        minor_radius = radius/6
+        major_radius = radius/2
+        minor_radius = radius/16
 
         pot_mouth_obj, pot_mouth_node = cmds.polyTorus(
             name="pot_mouth", radius=major_radius,

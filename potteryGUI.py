@@ -49,8 +49,8 @@ class Pottery_GUI(QtWidgets.QDialog):
         section_form_layout = QtWidgets.QFormLayout()
 
         # height sliders
-        self.slider_max_height = Custom_Slider("Max height", 0.01, 100)
-        self.slider_min_height = Custom_Slider("Min height", 0.01, 50)
+        self.slider_max_height = Custom_Slider("Max height", 0.01, 70)
+        self.slider_min_height = Custom_Slider("Min height", 0.01, 40)
         self.slider_max_height.set_bounded_slider(
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
