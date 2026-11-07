@@ -35,6 +35,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         self.default_spacing = 20
         self.default_distance = 7
         self.default_group_name = "myPots"
+        self.default_color = (150/255, 76/255, 55/255)
 
         self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
@@ -205,7 +206,8 @@ class Pottery_GUI(QtWidgets.QDialog):
                 self.slider_max_height.get_scaled_value(),
                 self.slider_min_width.get_scaled_value(),
                 self.slider_max_width.get_scaled_value(),
-                self.group_name_edit.text())
+                self.group_name_edit.text(),
+                self.default_color)
             self.pottery_generator.create()
         else:
             self.group_name_label.setText("Invalid Name")

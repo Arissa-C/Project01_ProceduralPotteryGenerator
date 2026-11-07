@@ -28,20 +28,20 @@ class Pottery():
                    spacing_between_pots, angle_between_pots,
                    first_pot_spacing,
                    min_height, max_height,
-                   min_radius, max_radius, grp_name):
+                   min_radius, max_radius, grp_name, color):
         # allows external dump of parameters into Pottery properties
         # to be called before create()
         self.total_pots, self.rotation_jitter, self.spacing_between_pots, \
             self.angle_between_pots, self.first_pot_spacing, \
             self.min_height, self.max_height, \
             self.min_radius, self.max_radius, \
-            self.grp_name = \
+            self.grp_name, self.color = \
             (total_pots,
                 rotation_jitter,
                 spacing_between_pots, angle_between_pots,
                 first_pot_spacing,
                 min_height, max_height,
-                min_radius, max_radius, grp_name)
+                min_radius, max_radius, grp_name, color)
 
     def create(self):
         # creates whole set of pots
