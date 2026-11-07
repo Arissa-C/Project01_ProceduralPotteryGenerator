@@ -21,7 +21,7 @@ class Pottery_Name_Validator(QtGui.QValidator):
         # If string is only alphanumeric or underscores, return acceptable
         valid_characters = string.ascii_letters + string.digits + "_"
 
-        if input_string in valid_characters:
+        if any(input_char in valid_characters for input_char in input_string):
             print("Acceptable")
             return QtGui.QValidator.Acceptable
         # In all other cases, return invalid
