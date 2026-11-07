@@ -20,7 +20,7 @@ class Pottery():
         self.min_radius = 1
         self.max_radius = 6
         # naming parameters
-        self.grp_name = "pots_grp"
+        self.grp_name = "myPottery"
 
     def set_values(self, total_pots,
                    rotation_jitter,
@@ -79,11 +79,15 @@ class Pottery():
         cmds.xform(rotation=[0, angle, 0],
                    translation=[x_coord, height/2, z_coord])
 
-        # create spherical pot top
-        pot_top = self.create_pot_top(radius, angle,
-                                      [x_coord, height, z_coord])
+        # create spherical pot top based on same arguments
+        pot_top_obj = self.create_pot_top(radius, angle,
+                                          [x_coord, height, z_coord])
 
-        return pot_base_obj
+        pot_group = cmds.group([pot_base_obj,
+                                pot_top_obj],
+                               name="pot_GRP")
+
+        return pot_group
 
     def create_pot_top(self, radius, rotation, translation):
         # create sphere of same radius as cylinder below
@@ -95,7 +99,7 @@ class Pottery():
                    translation=translation)
 
         return pot_top_obj
-        
+
     def calculate_position(self, spacing_between_pots,
                            angle_between_pots, first_pot_spacing,
                            current_pot_index):
