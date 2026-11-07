@@ -143,20 +143,23 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     @QtCore.Slot()
     def create(self):
-        # when create button is clicked
-        # send values to potterygenerator and create pot set
-        self.pottery_generator.set_values(
-            self.slider_total_pots.get_scaled_value(),
-            self.slider_rotation_jitter.get_scaled_value(),
-            self.slider_pot_spacing.get_scaled_value(),
-            self.slider_pot_angle.get_scaled_value(),
-            self.slider_first_pot_spacing.get_scaled_value(),
-            self.slider_min_height.get_scaled_value(),
-            self.slider_max_height.get_scaled_value(),
-            self.slider_min_width.get_scaled_value(),
-            self.slider_max_width.get_scaled_value(),
-            self.group_name_edit.text())
-        self.pottery_generator.create()
+        if not self.group_name_edit.text():
+            print("EMPTY STRING")
+        else:
+            # when create button is clicked
+            # send values to potterygenerator and create pot set
+            self.pottery_generator.set_values(
+                self.slider_total_pots.get_scaled_value(),
+                self.slider_rotation_jitter.get_scaled_value(),
+                self.slider_pot_spacing.get_scaled_value(),
+                self.slider_pot_angle.get_scaled_value(),
+                self.slider_first_pot_spacing.get_scaled_value(),
+                self.slider_min_height.get_scaled_value(),
+                self.slider_max_height.get_scaled_value(),
+                self.slider_min_width.get_scaled_value(),
+                self.slider_max_width.get_scaled_value(),
+                self.group_name_edit.text())
+            self.pottery_generator.create()
 
 
 # Create objects and run
