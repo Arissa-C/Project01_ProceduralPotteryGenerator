@@ -83,14 +83,21 @@ class Pottery():
         pot_top_obj = self.create_pot_top(radius, angle,
                                           [x_coord, height, z_coord])
 
+        # create torus pot mouth based on same arguments
+        pot_mouth_obj = self.create_pot_mouth(radius, angle,
+                                              [x_coord,
+                                               height+radius,
+                                               z_coord])
+
         pot_group = cmds.group([pot_base_obj,
-                                pot_top_obj],
+                                pot_top_obj,
+                                pot_mouth_obj],
                                name="pot_GRP")
 
         return pot_group
 
     def create_pot_top(self, radius, rotation, translation):
-        # create sphere of same radius as cylinder below
+        # create sphere of same radius as base cylinder
         pot_top_obj, pot_top_node = cmds.polySphere(
             name="pot_top", radius=radius)
 
@@ -99,6 +106,21 @@ class Pottery():
                    translation=translation)
 
         return pot_top_obj
+
+    def create_pot_mouth(self, radius, rotation, translation):
+        # create torus of smaller radius as base cylinder
+        major_radius = radius/3
+        minor_radius = radius/6
+
+        pot_mouth_obj, pot_mouth_node = cmds.polyTorus(
+            name="pot_mouth", radius=major_radius,
+            sectionRadius=minor_radius)
+
+        # translate to top of pot_top, rotate to same angle
+        cmds.xform(rotation=[0, rotation, 0],
+                   translation=translation)
+
+        return pot_mouth_obj
 
     def calculate_position(self, spacing_between_pots,
                            angle_between_pots, first_pot_spacing,
