@@ -60,8 +60,8 @@ class Pottery_GUI(QtWidgets.QDialog):
             "Max height", 0.01, 70)
         self.slider_min_height = Custom_Slider(
             "Min height", 0.01, 40)
-        self.all_sliders.append[self.slider_max_height,
-                                self.slider_min_height]
+        self.all_sliders.extend([self.slider_max_height,
+                                self.slider_min_height])
         self.slider_max_height.set_bounded_slider(
             self.slider_min_height, Bounding_Type.MIN)
         self.slider_min_height.set_bounded_slider(
@@ -86,8 +86,8 @@ class Pottery_GUI(QtWidgets.QDialog):
             "Max width", 0.01, 50)
         self.slider_min_width = Custom_Slider(
             "Min width", 0.01, 20)
-        self.all_sliders.append[self.slider_max_width,
-                                self.slider_min_width]
+        self.all_sliders.extend([self.slider_max_width,
+                                self.slider_min_width])
         self.slider_max_width.set_bounded_slider(
             self.slider_min_width, Bounding_Type.MIN)
         self.slider_min_width.set_bounded_slider(
@@ -118,11 +118,11 @@ class Pottery_GUI(QtWidgets.QDialog):
             "Distribution spacing", 0.01, 20, 0, 200)
         self.slider_first_pot_spacing = Custom_Slider(
             "Distance from center", 0.1, 7, 0, 100)
-        self.all_sliders.append[self.slider_total_pots,
+        self.all_sliders.extend([self.slider_total_pots,
                                 self.slider_rotation_jitter,
                                 self.slider_pot_angle,
                                 self.slider_pot_spacing,
-                                self.slider_first_pot_spacing]
+                                self.slider_first_pot_spacing])
         section_form_layout.addRow(self.slider_total_pots.get_label(),
                                    self.slider_total_pots)
         section_form_layout.addRow(self.slider_rotation_jitter.get_label(),

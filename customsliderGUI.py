@@ -35,7 +35,7 @@ class Custom_Slider(QtWidgets.QSlider):
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
     def reset_to_defaults(self):
-        print("HELLO")
+        print("reset_to_defaults fired")
         slider_to_check = 40
         if self.default_value == slider_to_check:
             print(f"current defaults: {self.default_min},\
@@ -99,7 +99,6 @@ class Custom_Slider(QtWidgets.QSlider):
         # makes sliders subject to enforce_slider_bounds
         self.bounded_slider = slider
         self.bounded_slider_type = type
-        # self.enforce_own_bounds()
         self.enforce_own_bounds()
 
     def enforce_own_bounds(self):
