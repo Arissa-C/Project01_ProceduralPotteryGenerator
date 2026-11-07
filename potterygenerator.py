@@ -164,18 +164,10 @@ class Pottery():
         return (height, radius)
 
     def color_pots(self, group):
+        # get pot shapes, shaders, set color
         shape = cmds.ls(o=True, shapes=True)
         shadingGrps = cmds.listConnections(shape, type='shadingEngine')
         shaders = cmds.ls(cmds.listConnections(shadingGrps),
                           materials=True)
         cmds.setAttr(shaders[0]+".baseColor",
                      150/255, 76/255, 55/255, type="double3")
-        '''
-        for obj in group:
-            shape = cmds.ls(o=True, shapes=True)
-            shadingGrps = cmds.listConnections(shape, type='shadingEngine')
-            shaders = cmds.ls(cmds.listConnections(shadingGrps),
-                              materials=True)
-            cmds.setAttr(shaders[0]+".baseColor",
-                         150/255, 76/255, 55/255, type="double3")
-        '''
