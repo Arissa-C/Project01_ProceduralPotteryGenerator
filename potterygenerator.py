@@ -79,8 +79,23 @@ class Pottery():
         cmds.xform(rotation=[0, angle, 0],
                    translation=[x_coord, height/2, z_coord])
 
+        # create spherical pot top
+        pot_top = self.create_pot_top(radius, angle,
+                                      [x_coord, height, z_coord])
+
         return pot_base_obj
 
+    def create_pot_top(self, radius, rotation, translation):
+        # create sphere of same radius as cylinder below
+        pot_top_obj, pot_top_node = cmds.polySphere(
+            name="pot_top", radius=radius)
+
+        # translate to top of cylinder, rotate to same angle
+        cmds.xform(rotation=[0, rotation, 0],
+                   translation=translation)
+
+        return pot_top_obj
+        
     def calculate_position(self, spacing_between_pots,
                            angle_between_pots, first_pot_spacing,
                            current_pot_index):
