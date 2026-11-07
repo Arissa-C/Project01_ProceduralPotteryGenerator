@@ -88,6 +88,7 @@ class Custom_Slider(QtWidgets.QSlider):
         # prevents MIN-type sliders from exceeding MAX counterpart & vice-versa
         # this is done by making the value of MIN the lower bound of MAX
         # and value of MAX becomes the lower bound of MIN
+
         if self.bounded_slider_type is Bounding_Type.MAX:
             new_min = self.value()
             self.bounded_slider.setMinimum(new_min)
