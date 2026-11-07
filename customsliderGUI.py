@@ -58,8 +58,7 @@ class Custom_Slider(QtWidgets.QSlider):
     def set_label(self):
         # create label for slider, displays name and value
         self.assigned_label = QtWidgets.QLabel()
-        self.assigned_label.setText(
-            self.name + ": " + self.get_display_value())
+        self.update_slider_text(0)
 
     def get_label(self):
         # this method mostly used by QFormLayouts in potteryGUI
