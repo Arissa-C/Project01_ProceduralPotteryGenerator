@@ -75,7 +75,7 @@ class Pottery_GUI(QtWidgets.QDialog):
             self.slider_min_height.get_label(), self.slider_min_height)
 
         # add sliders to groupbox
-        section_group_box = QtWidgets.QGroupBox("Pots height")
+        section_group_box = QtWidgets.QGroupBox("Height range")
         section_group_box.setLayout(section_form_layout)
 
         return section_group_box
@@ -99,7 +99,7 @@ class Pottery_GUI(QtWidgets.QDialog):
             self.slider_min_width.get_label(), self.slider_min_width)
 
         # add sliders to groupbox
-        section_group_box = QtWidgets.QGroupBox("Pots width (radius)")
+        section_group_box = QtWidgets.QGroupBox("Width (radius) range")
         section_group_box.setLayout(section_form_layout)
 
         return section_group_box
@@ -131,7 +131,7 @@ class Pottery_GUI(QtWidgets.QDialog):
                                    self.slider_first_pot_spacing)
 
         # add parameters to groupbox
-        section_group_box = QtWidgets.QGroupBox("Pots distribution")
+        section_group_box = QtWidgets.QGroupBox("Distribution")
         section_group_box.setLayout(section_form_layout)
 
         return section_group_box
