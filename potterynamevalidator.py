@@ -1,7 +1,7 @@
-from PySide2 import QtGUI
+from PySide2 import QtGui
 
 
-class Pottery_Name_Validator(QtGUI.QValidator):
+class Pottery_Name_Validator(QtGui.QValidator):
 
     def __init__(self):
         super().__init__()
@@ -11,4 +11,4 @@ class Pottery_Name_Validator(QtGUI.QValidator):
         # Acceptable = alphanumeric, underscores
         # Intermediate = NONE
         # Invalid = blank characters (spaces, newline, etc.) special characters
-        return QtGUI.QValidator.Acceptable
+        return QtGui.QValidator.Acceptable
