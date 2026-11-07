@@ -21,6 +21,7 @@ class Pottery():
         self.max_radius = 6
         # other parameters
         self.grp_name = "myPottery"
+        self.color = (150/255, 76/255, 55/255)
 
     def set_values(self, total_pots,
                    rotation_jitter,
@@ -56,8 +57,8 @@ class Pottery():
                               self.angle_between_pots, self.first_pot_spacing,
                               pot_index))
 
-        final_group = cmds.group(group_objs, name=self.grp_name)
-        self.color_pots(final_group)
+        cmds.group(group_objs, name=self.grp_name)
+        self.color_pots(self.color)
 
     def create_pot(self,
                    min_height, max_height,
@@ -163,11 +164,13 @@ class Pottery():
         radius = random.uniform(min_radius, max_radius)
         return (height, radius)
 
-    def color_pots(self, group):
+    def color_pots(self, rgb):
         # get pot shapes, shaders, set color
         shape = cmds.ls(o=True, shapes=True)
         shadingGrps = cmds.listConnections(shape, type='shadingEngine')
         shaders = cmds.ls(cmds.listConnections(shadingGrps),
                           materials=True)
+
+        r, g, b = rgb
         cmds.setAttr(shaders[0]+".baseColor",
-                     150/255, 76/255, 55/255, type="double3")
+                     r, g, b, type="double3")
