@@ -35,52 +35,10 @@ class Custom_Slider(QtWidgets.QSlider):
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
     def reset_to_defaults(self):
-        slider_to_check = 70
-        if self.bounded_slider and self.default_value == slider_to_check:
-            print(f"current defaults: {self.default_value},"
-                  f"{self.default_min}, {self.default_max}")
-            print(f"paired defaults: {self.bounded_slider.default_value},"
-                  f"{self.bounded_slider.default_min},"
-                  f"{self.bounded_slider.default_max}")
-            print()
-            print(f"Old values: {self.value()},"
-                  f"{self.minimum()}, {self.maximum()}")
-            print(f"Paired old values: {self.bounded_slider.value()},"
-                  f"{self.bounded_slider.minimum()},"
-                  f"{self.bounded_slider.maximum()}")
-            print()
         self.setRange(self.default_min, self.default_max)
-        if self.bounded_slider and self.default_value == slider_to_check:
-            print(f"After setRange: {self.value()},"
-                  f"{self.minimum()}, {self.maximum()}")
-            print(f"Paired after setRange: {self.bounded_slider.value()},"
-                  f"{self.bounded_slider.minimum()},"
-                  f"{self.bounded_slider.maximum()}")
-            print()
         self.setValue(self.default_value)
-        if self.bounded_slider and self.default_value == slider_to_check:
-            print(f"After setValue: {self.value()},"
-                  f"{self.minimum()}, {self.maximum()}")
-            print(f"Paired after setvalue: {self.bounded_slider.value()},"
-                  f"{self.bounded_slider.minimum()},"
-                  f"{self.bounded_slider.maximum()}")
-            print()
         self.enforce_slider_bounds()
-        if self.bounded_slider and self.default_value == slider_to_check:
-            print(f"After enforce other: {self.value()},"
-                  f"{self.minimum()}, {self.maximum()}")
-            print(f"Paired after enforce other: {self.bounded_slider.value()},"
-                  f"{self.bounded_slider.minimum()},"
-                  f"{self.bounded_slider.maximum()}")
-            print()
         self.enforce_own_bounds()
-        if self.bounded_slider and self.default_value == slider_to_check:
-            print(f"After enforce: {self.value()},"
-                  f"{self.minimum()}, {self.maximum()}")
-            print(f"Paired after enforce: {self.bounded_slider.value()},"
-                  f"{self.bounded_slider.minimum()},"
-                  f"{self.bounded_slider.maximum()}")
-            print()
 
     def get_decimal_places_from_scaling(self):
         # if scaling is a decimal, return how many decimal places are provided
