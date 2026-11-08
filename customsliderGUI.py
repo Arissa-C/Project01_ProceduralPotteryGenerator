@@ -65,19 +65,19 @@ class Custom_Slider(QtWidgets.QSlider):
                   f"{self.bounded_slider.minimum()},"
                   f"{self.bounded_slider.maximum()}")
             print()
-        self.enforce_own_bounds()
-        if self.bounded_slider and self.default_value == slider_to_check:
-            print(f"After enforce: {self.value()},"
-                  f"{self.minimum()}, {self.maximum()}")
-            print(f"Paired after enforce: {self.bounded_slider.value()},"
-                  f"{self.bounded_slider.minimum()},"
-                  f"{self.bounded_slider.maximum()}")
-            print()
         self.enforce_slider_bounds()
         if self.bounded_slider and self.default_value == slider_to_check:
             print(f"After enforce other: {self.value()},"
                   f"{self.minimum()}, {self.maximum()}")
             print(f"Paired after enforce other: {self.bounded_slider.value()},"
+                  f"{self.bounded_slider.minimum()},"
+                  f"{self.bounded_slider.maximum()}")
+            print()
+        self.enforce_own_bounds()
+        if self.bounded_slider and self.default_value == slider_to_check:
+            print(f"After enforce: {self.value()},"
+                  f"{self.minimum()}, {self.maximum()}")
+            print(f"Paired after enforce: {self.bounded_slider.value()},"
                   f"{self.bounded_slider.minimum()},"
                   f"{self.bounded_slider.maximum()}")
             print()
