@@ -24,12 +24,16 @@ def get_main_maya_window():
 class Pottery_GUI(QtWidgets.QDialog):
 
     def __init__(self):
+        # parent allows potterygui window to remain on top of maya window
         super().__init__(parent=get_main_maya_window())
+
+        # set potterygui main attributes
         self.default_group_name = "myPots"
         self.default_group_label = "Group Name"
         self.default_color = (150/255, 76/255, 55/255)
         self.all_sliders = []
 
+        # create potterygui window and connections
         self.pottery_generator = Pottery()
         self.setWindowTitle("Pot Generator 9000")
         self.setWindowFlag(QtCore.Qt.WindowType.Tool)
@@ -38,6 +42,7 @@ class Pottery_GUI(QtWidgets.QDialog):
 
     def create_layout(self):
         # Overall window layout, smaller sections and widgets added here
+        # added to main window
         self.main_window = QtWidgets.QVBoxLayout()
 
         self.main_window.addWidget(self.create_height_section())
@@ -141,7 +146,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         return section_group_box
 
     def create_group_name_edit(self):
-        # QLineEdit widget that lets user change group name
+        # a QLineEdit widget that lets user change group name
         section_form_layout = QtWidgets.QFormLayout()
 
         self.group_name_edit = QtWidgets.QLineEdit()
@@ -160,6 +165,7 @@ class Pottery_GUI(QtWidgets.QDialog):
         return section_form_layout
 
     def check_valid_group_name(self):
+        # helper function called by create() whenever button is clicked
         text_to_check = self.group_name_edit.text()
 
         # if group name is empty, has digit in first position

@@ -8,8 +8,13 @@ class Pottery_Name_Validator(QtGui.QValidator):
         super().__init__()
 
     def validate(validator_class, input_string, cursor_position):
+        # Called whenever user types into QLineEdit that has this validator set
+        # prevents invalid chars from being entered
+        # allows acceptable or intermediate actions to occur
+        #
         # Arguments (this isn't in documentation for some reason):
         # 1st is validator class (don't know if this is instance or type)
+        # maybe first argument is a self instance?
         # 2nd is full input string
         # 3rd is cursor position int
         #

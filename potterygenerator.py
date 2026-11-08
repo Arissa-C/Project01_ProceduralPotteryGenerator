@@ -47,10 +47,11 @@ class Pottery():
         # creates whole set of pots
         # call create one pot method in loop
         # use for loop, loop based on range(total_pots)
-        # inside loop
         group_objs = []
 
         for pot_index in range(self.total_pots):
+            # create a new pot (group including base, top, mouth)
+            # append to list (objs to eventually group together in the end)
             group_objs.append(self.create_pot(self.min_height, self.max_height,
                               self.min_radius, self.max_radius,
                               self.rotation_jitter, self.spacing_between_pots,

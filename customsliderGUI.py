@@ -3,8 +3,9 @@ from enum import Enum
 
 
 class Bounding_Type(Enum):
-    # used in customsliderGUI, potteryGUI
-    # used to link customsliders together and flag their relationships
+    # referenced in customsliderGUI, potteryGUI
+    # describes states that represent a slider type, if needed
+    # if slider is meant to represent a max or min value, use this
     NONE = 0
     MIN = 1
     MAX = 2
@@ -15,13 +16,13 @@ class Custom_Slider(QtWidgets.QSlider):
     def __init__(self, name: str, scaling=None, value=100, min=0, max=200):
         super().__init__()
 
-        # custom slider values
+        # custom slider attributes
         self.name: str = name
         self.scaling = scaling
         self.bounded_slider: QtWidgets.QSlider = None
         self.bounded_slider_type: Bounding_Type = Bounding_Type.NONE
 
-        # remember defaults
+        # standard slider attributes
         self.default_value = value
         self.default_min = min
         self.default_max = max
@@ -35,12 +36,15 @@ class Custom_Slider(QtWidgets.QSlider):
         self.sliderReleased.connect(self.enforce_slider_bounds)
 
     def reset_to_defaults(self):
+        # called by constructer
+        # also called externally by PotteryGUI
         self.setRange(self.default_min, self.default_max)
         self.setValue(self.default_value)
         self.enforce_slider_bounds()
         self.enforce_own_bounds()
 
     def get_decimal_places_from_scaling(self):
+        # helper function for get_display_value to handle decimal places
         # if scaling is a decimal, return how many decimal places are provided
         if not self.scaling or self.scaling is int:
             return 0
@@ -51,6 +55,10 @@ class Custom_Slider(QtWidgets.QSlider):
         # scaled value allows me to bypass QSlider being restricted to ints
         # ex. value = 10, scaling = 0.01, scaled_value = 0.1
         # if no scaling, then treat slider as normal and return int value
+        #
+        # this is called by get_display_value, which cleans up values to be
+        # displayed, and also potteryGUI.create() which sends values
+        # to potterygenerator
         if self.scaling:
             return float(self.value()*self.scaling)
         return self.value()
@@ -65,21 +73,23 @@ class Custom_Slider(QtWidgets.QSlider):
 
     def set_label(self):
         # create label for slider, displays name and value
+        # called by constructor
         self.assigned_label = QtWidgets.QLabel()
         self.update_slider_text(0)
 
     def get_label(self):
-        # this method mostly used by QFormLayouts in potteryGUI
+        # this method called by the QFormLayouts in potteryGUI
         return self.assigned_label
 
     def update_slider_text(self, value):
-        # connected to QSlider.valueChanged
+        # connected to QSlider.valueChanged, so fires when slider moved
         # lets label display slider scaled_value
         self.assigned_label.setText(
             self.name + ": " + self.get_display_value())
 
     def set_bounded_slider(
             self, slider: QtWidgets.QSlider, type: Bounding_Type):
+        # called externally by potteryGUI
         # if slider is in a MIN-MAX pair, declare explicitly with this method
         # makes sliders subject to enforce_slider_bounds
         self.bounded_slider = slider
@@ -87,6 +97,7 @@ class Custom_Slider(QtWidgets.QSlider):
         self.enforce_own_bounds()
 
     def enforce_own_bounds(self):
+        # called externally by potteryGUI when slider is created or on reset
         # ad-hoc enum equality check here too
 
         # if connected slider is a max type, set its value as this sliders max
@@ -97,7 +108,7 @@ class Custom_Slider(QtWidgets.QSlider):
             self.setMinimum(self.bounded_slider.value())
 
     def enforce_slider_bounds(self):
-        # connected to QSlider.sliderReleased
+        # connected to QSlider.sliderReleased, so fires when user lets go
         #
         # works as input validation for sliders
         # prevents MIN-type sliders from exceeding MAX counterpart & vice-versa
