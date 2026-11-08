@@ -87,9 +87,8 @@ class Custom_Slider(QtWidgets.QSlider):
         self.enforce_own_bounds()
 
     def enforce_own_bounds(self):
-        '''
         # ad-hoc enum equality check here too
-        '''
+
         # if connected slider is a max type, set its value as this sliders max
         # if connected slider is a min type, set its value as this sliders min
         if str(self.bounded_slider_type) == str(Bounding_Type.MAX):
@@ -105,8 +104,7 @@ class Custom_Slider(QtWidgets.QSlider):
         # this is done by making the value of MIN the lower bound of MAX
         # and value of MAX becomes the lower bound of MIN
 
-        '''
-        # had to change enum comparison via "is" keyword
+        # in if statements, had to change enum comparison via "is" keyword
         # it used to look like self.bounded_slider_type is Bounding_Type.Max
         # now, it converts enums to str and check literal equality via ==
         # this is because out of nowhere, the code here stopped working
@@ -115,7 +113,6 @@ class Custom_Slider(QtWidgets.QSlider):
         # were the problem
         # in essence, "Bounding_Type.MAX is Bounding_Type.MAX" was
         # returning false and StackOverflow says its a module import problem
-        '''
         if str(self.bounded_slider_type) == str(Bounding_Type.MAX):
             new_min = self.value()
             self.bounded_slider.setMinimum(new_min)
